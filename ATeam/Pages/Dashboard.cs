@@ -15,7 +15,19 @@ namespace ATeam.Pages
         {
         }
 
-        [FindsBy(How = How.LinkText, Using = "Dziś")]
+        [FindsBy(How = How.CssSelector, Using = "button[class*='fc-today-button']")]
         public IWebElement TodayLink { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "button[class*='fc-prev-button']")]
+        public IWebElement PreviousMonthLink { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "button[class*='fc-next-button']")]
+        public IWebElement NextMonthLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "Dodaj sesję")]
+        public IWebElement AddSessionButton { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "Dodaj zgłoszenie")]
+        public IWebElement NewRegistrationButton { get; set; }
     }
 }
