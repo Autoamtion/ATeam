@@ -14,6 +14,13 @@ namespace ATeam.Tests
     public class LoginTests : BaseTest
     {
         [TestMethod]
+        public virtual void LoginPageCheckAvailableLanguageOptions()
+        {
+            var landing = new LandingPage(this.driver, true);
+            base.CheckAvailableLanguageOptions(new Login(this.driver));
+        }
+
+        [TestMethod]
         public void ValidLoginWorks()
         {
             var page = new Login(this.driver);

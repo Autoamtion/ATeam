@@ -62,6 +62,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\WebElementExtensions.cs" />
+    <Compile Include="Pages\Dashboard.cs" />
     <Compile Include="Pages\LandingPage.cs" />
     <Compile Include="Pages\Login.cs" />
     <Compile Include="Pages\Page.cs" />
