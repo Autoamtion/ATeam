@@ -21,6 +21,9 @@ namespace ATeam.Pages
             PageFactory.InitElements(this.driver, this);
         }
 
+        [FindsBy(How = How.CssSelector, Using = "img[src='/media/logo.png']")]
+        public IWebElement PgsLogo { get; set; }
+
         public string VisibleText
         {
             get

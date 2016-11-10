@@ -16,13 +16,8 @@ namespace ATeam.Tests
         [TestMethod]
         public void ValidLoginWorks()
         {
-            var landingPage = new LandingPage(this.driver);
-            landingPage.LoginLink.Click();
-
             var page = new Login(this.driver);
-            page.Email.SendKeys("ateam1@pgs-soft.com");
-            page.PasswordPass.SendKeys("YhBQWmtQLt");
-            page.LogIn.Click();
+            page.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             Assert.IsTrue(page.VisibleText.Contains("Dashboard"), "Dashboard is not displayed after log in");
             Assert.IsFalse(page.VisibleText.Contains("Zaloguj się"), "Login is still displated after valid log in");
             Assert.IsFalse(page.Email.Exists());

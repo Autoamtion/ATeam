@@ -5,5 +5,23 @@
     <Setting Name="StartUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://examplanner.pgs-soft.com/ateam</Value>
     </Setting>
+    <Setting Name="UserAteam1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ateam1@pgs-soft.com</Value>
+    </Setting>
+    <Setting Name="PasswordAteam1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">YhBQWmtQLt</Value>
+    </Setting>
+    <Setting Name="UserAteam2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ateam2@pgs-soft.com</Value>
+    </Setting>
+    <Setting Name="PasswordAteam2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MTd4QHdI8i</Value>
+    </Setting>
+    <Setting Name="UserAteam3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ateam3@pgs-soft.com</Value>
+    </Setting>
+    <Setting Name="PasswordAteam3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">4dR5NU7eUJ</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

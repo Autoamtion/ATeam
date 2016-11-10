@@ -15,6 +15,15 @@ namespace ATeam.Pages
         {
         }
 
+        public LandingPage(IWebDriver webdriver, bool goToLoginPage = false)
+            : base(webdriver)
+        {
+            if (goToLoginPage)
+            {
+                this.LoginLink.Click();
+            }
+        }
+
         [FindsBy(How = How.Id, Using = "loginLink")]
         public IWebElement LoginLink { get; set; }
     }

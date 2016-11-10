@@ -37,5 +37,13 @@ namespace ATeam.Pages
 
         [FindsBy(How = How.CssSelector, Using = "input[type='submit']")]
         public IWebElement LogIn { get; set; }
+
+        public void LogIntoServie(string user, string pwd)
+        {
+            var landingPage = new LandingPage(this.driver, true);
+            this.Email.SendKeys(user);
+            this.PasswordPass.SendKeys(pwd);
+            this.LogIn.Click();
+        }
     }
 }
