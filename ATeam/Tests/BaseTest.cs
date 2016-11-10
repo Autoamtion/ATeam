@@ -14,6 +14,7 @@ namespace ATeam.Tests
         public void Initialize()
         {
             this.driver = new FirefoxDriver();
+            this.driver.Manage().Window.Maximize();
             this.driver.Navigate().GoToUrl(Properties.Settings.Default.StartUrl);
         }
 
