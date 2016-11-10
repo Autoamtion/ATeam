@@ -28,7 +28,8 @@ namespace ATeam
             page.Email.SendKeys("ateam1@pgs-soft.com");
             page.PasswordPass.SendKeys("YhBQWmtQLt");
             page.LogIn.Click();
-            Assert.IsTrue(page.VisibleText.Contains("Dashboard"));
+            Assert.IsTrue(page.VisibleText.Contains("Dashboard"), "Dashboard is not displayed after log in");
+            Assert.IsFalse(page.VisibleText.Contains("Zaloguj się"), "Login is still displated after valid log in");
         }
 
         [TestCleanup]
