@@ -21,6 +21,13 @@ namespace ATeam.Tests
         }
 
         [TestMethod]
+        public virtual void LoginPageCheckPgsLogo()
+        {
+            var landing = new LandingPage(this.driver, true);
+            base.CheckPgsLogoExists(new Login(this.driver));
+        }
+
+        [TestMethod]
         public void ValidLoginWorks()
         {
             var page = new Login(this.driver);

@@ -29,6 +29,14 @@ namespace ATeam.Tests
         }
 
         [TestMethod]
+        public virtual void CheckAvailableUserMenuOptions(Page testedPage)
+        {
+            testedPage.UserMenu.Click();
+            Assert.IsTrue(testedPage.UserProfileEdit.Exists(), string.Format("User profile edit option is not available in User drop down list on page {0}!", testedPage.GetType().Name));
+            Assert.IsTrue(testedPage.Logoff.Exists(), string.Format("Logoff option is not available in User drop down list on page {0}!", testedPage.GetType().Name));
+        }
+
+        [TestMethod]
         public virtual void CheckPgsLogoExists(Page testedPage)
         {
             Assert.IsTrue(testedPage.PgsLogo.Exists(), string.Format("PGS logo is not displayed on page {0}!", testedPage.GetType().Name));
