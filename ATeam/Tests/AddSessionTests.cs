@@ -35,7 +35,7 @@ namespace ATeam.Tests
             session.IstqbAdvancedLevelTestManagerPlaces.SendKeys("5");
             session.ExaminerId.Click();
             session.ExaminerAteam1.Click();
-            ////session.SaveSession.Click();
+            session.SaveSession.Click();
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace ATeam.Tests
             Assert.IsFalse(session.IstqbFoundationLevelEnglishPolish.Exists());
             session.ExaminerId.Click();
             session.ExaminerAteam1.Click();
-            ////session.SaveSession.Click();
+            session.SaveSession.Click();
         }
     }
 }

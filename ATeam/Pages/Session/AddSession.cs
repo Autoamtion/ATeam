@@ -100,7 +100,7 @@ namespace ATeam.Pages.Session
         [FindsBy(How = How.LinkText, Using = "Anuluj")]
         public IWebElement Cancel { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Zapisz sesję")]
+        [FindsBy(How = How.CssSelector, Using = "button[type='submit']")]
         public IWebElement SaveSession { get; set; }
 
         [FindsBy(How = How.Name, Using = "SessionDto.Products[4].CapacityForProductSession")]
