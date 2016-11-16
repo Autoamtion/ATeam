@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -60,6 +61,28 @@ namespace ATeam.Helpers
                 return false;
             }
             catch (InvalidOperationException)
+            {
+                return false;
+            }
+        }
+
+        public static bool AlertHandling(this IWebDriver webDriver, bool confirmAlert = true)
+        {
+            try
+            {
+                var alert = webDriver.SwitchTo().Alert();
+                if (confirmAlert)
+                {
+                    alert.Accept();
+                }
+                else
+                {
+                    alert.Dismiss();
+                }
+
+                return true;
+            }
+            catch(NoAlertPresentException)
             {
                 return false;
             }

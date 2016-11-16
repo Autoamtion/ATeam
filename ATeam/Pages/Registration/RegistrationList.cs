@@ -1,4 +1,6 @@
-﻿using ATeam.Helpers;
+﻿using System.Linq;
+using System.Threading;
+using ATeam.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
@@ -84,10 +86,12 @@ namespace ATeam.Pages.Registration
 
         private void RecordActionElementClick(int record, By selector)
         {
-            this.driver.FindElement(By.CssSelector("#DataTables_Table_0")).FocusAtElement(this.driver);
-            var link = this.driver.FindElements(selector)[record - 1];
-            link.FocusAtElement(this.driver);
-            link.Click();
+            var regListTable = this.driver.FindElement(By.CssSelector("#DataTables_Table_0"));
+            regListTable.FocusAtElement(this.driver);
+            Thread.Sleep(500);
+            var links = regListTable.FindElements(selector);
+            links[record - 1].FocusAtElement(this.driver);
+            links[record - 1].Click();
         }
     }
 }
