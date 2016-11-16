@@ -70,6 +70,10 @@
     <Compile Include="Pages\Registration\DataForCertification.cs" />
     <Compile Include="Pages\Registration\IndividualDetails.cs" />
     <Compile Include="Pages\Registration\RegisteringPerson.cs" />
+    <Compile Include="Pages\RegisterProduct\GetAddress.cs" />
+    <Compile Include="Pages\RegisterProduct\GetAttendee.cs" />
+    <Compile Include="Pages\RegisterProduct\GetAttendees.cs" />
+    <Compile Include="Pages\RegisterProduct\GetPersonData.cs" />
     <Compile Include="Pages\Registration\RegistrationList.cs" />
     <Compile Include="Pages\Session\AddSession.cs" />
     <Compile Include="Tests\LoginTests.cs" />
