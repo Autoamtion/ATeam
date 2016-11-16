@@ -26,5 +26,11 @@ namespace ATeam.Pages
 
         [FindsBy(How = How.Id, Using = "loginLink")]
         public IWebElement LoginLink { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "td[data-productsessionid]")]
+        public IList<IWebElement> IndividualRegistration { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "div[data-session]")]
+        public IList<IWebElement> GroupRegistration { get; set; }
     }
 }

@@ -55,11 +55,14 @@ namespace ATeam.Tests
             session.SpacePerSession.Click();
             session.SpaceForSession.SendKeys("5");
             session.LevelSelect.Click();
+            session.LevelOther.Click();
+            session.LevelBase.Click();
+            session.LevelExpert.Click();
             session.LevelAdvanced.Click();
             session.LevelSelect.Click();
             session.ProductSelect.Click();
-            session.IstqbAdvancedLevelTestManagerEnglishPolish.Click();
-            Assert.IsFalse(session.IstqbFoundationLevelEnglishPolish.Exists());
+            session.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish.Click();
+            Assert.IsTrue(session.IstqbFoundationLevelEnglishPolish.Exists());
             session.ExaminerId.Click();
             session.ExaminerAteam1.Click();
             session.SaveSession.Click();

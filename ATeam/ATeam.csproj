@@ -61,8 +61,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Helpers\ObjectHelper.cs" />
+    <Compile Include="Helpers\RandomDataHelper.cs" />
     <Compile Include="Helpers\WebDriverExtensions.cs" />
     <Compile Include="Helpers\WebElementExtensions.cs" />
+    <Compile Include="Objects\Attendee.cs" />
+    <Compile Include="Objects\ContactData.cs" />
+    <Compile Include="Objects\Enumerators.cs" />
+    <Compile Include="Objects\InputData.cs" />
     <Compile Include="Pages\Dashboard.cs" />
     <Compile Include="Pages\LandingPage.cs" />
     <Compile Include="Pages\Login.cs" />
@@ -89,6 +95,7 @@
     <Compile Include="Tests\LandingTests.cs" />
     <Compile Include="Tests\RegistrationListTest.cs" />
     <Compile Include="Tests\IndividualDetailsTest.cs" />
+    <Compile Include="Tests\ExamRegistrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

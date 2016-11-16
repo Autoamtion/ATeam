@@ -8,13 +8,16 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace ATeam.Pages.RegisterProduct
 {
+    using ATeam.Helpers;
+    using ATeam.Objects;
+
     public class GetAttendees : Page
     {
         public GetAttendees(IWebDriver webdriver) : base(webdriver)
         {
         }
 
-        [FindsBy(How = How.Name, Using = "name")]
+        [FindsBy(How = How.CssSelector, Using = "input[name='name']")]
         public IWebElement Name { get; set; }
 
         [FindsBy(How = How.Name, Using = "surname")]
@@ -26,8 +29,8 @@ namespace ATeam.Pages.RegisterProduct
         [FindsBy(How = How.Name, Using = "phone")]
         public IWebElement Phone { get; set; }
 
-        [FindsBy(How = How.Id, Using = "product")]
-        public IWebElement Product { get; set; }
+        [FindsBy(How = How.Name, Using = "product")]
+        public IList<IWebElement> Product { get; set; }
 
         [FindsBy(How = How.Id, Using = "RegistrationLanguageID7")]
         public IWebElement ProductLanguageEnglish { get; set; }
@@ -55,5 +58,45 @@ namespace ATeam.Pages.RegisterProduct
 
         [FindsBy(How = How.CssSelector, Using = "div[class='Register-forwardBtn'] > button")]
         public IWebElement Forward { get; set; }
+
+        public void Populate(Attendee att)
+        {
+            this.Name.SendKeys(att.Name);
+            this.Surname.SendKeys(att.SurName);
+            this.Email.SendKeys(att.Email);
+            if (att.FillPhone)
+            {
+                this.Phone.SendKeys(att.PhoneNumber);
+            }
+
+            this.Product[att.SelectedProductId].Click();
+            this.driver.WaitForAjax();
+            this.ProductLanguagePolish.WaitForElement(500);
+
+            if (att.IsEnglish)
+            {
+                this.ProductLanguageEnglish.Click();
+            }
+            else
+            {
+                this.ProductLanguagePolish.Click();
+            }
+
+            if (att.IsPaperExam)
+            {
+                this.ProductFormPaper.Click();
+            }
+            else
+            {
+                this.ProductFormElectronic.Click();
+            }
+
+            if (this.CertificateNumber.Exists())
+            {
+                this.CertificateNumber.SendKeys(att.CertificateNumber);
+                this.CertificateDate.SendKeys(att.CertificateIssueDate);
+                this.CertificateProvider.SendKeys(att.CertificateIssuer);
+            }
+        }
     }
 }

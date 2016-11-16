@@ -8,6 +8,9 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace ATeam.Pages.RegisterProduct
 {
+    using ATeam.Helpers;
+    using ATeam.Objects;
+
     public class GetAttendee : Page
     {
         public GetAttendee(IWebDriver webdriver) : base(webdriver)
@@ -38,5 +41,32 @@ namespace ATeam.Pages.RegisterProduct
         [FindsBy(How = How.CssSelector, Using = "button[type='submit']")]
         public IWebElement Forward { get; set; }
 
+        public void Populate(Attendee att)
+        {
+            if (att.IsEnglish)
+            {
+                this.ProductLanguageEnglish.Click();
+            }
+            else
+            {
+                this.ProductLanguagePolish.Click();
+            }
+
+            if (att.IsPaperExam)
+            {
+                this.ProductFormPaper.Click();
+            }
+            else
+            {
+                this.ProductFormElectronic.Click();
+            }
+
+            if (this.CertificateNumber.Exists())
+            {
+                this.CertificateNumber.SendKeys(att.CertificateNumber);
+                this.CertificateDate.SendKeys(att.CertificateIssueDate);
+                this.CertificateProvider.SendKeys(att.CertificateIssuer);
+            }
+        }
     }
 }

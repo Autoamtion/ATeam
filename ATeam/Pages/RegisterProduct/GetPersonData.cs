@@ -8,6 +8,8 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace ATeam.Pages.RegisterProduct
 {
+    using ATeam.Objects;
+
     public class GetPersonData : Page
     {
         public GetPersonData(IWebDriver webdriver) : base(webdriver)
@@ -31,5 +33,16 @@ namespace ATeam.Pages.RegisterProduct
 
         [FindsBy(How = How.CssSelector, Using = "button[value='Forward']")]
         public IWebElement Forward { get; set; }
+
+        public void Populate(ContactData data)
+        {
+            this.Name.SendKeys(data.PersonDataName);
+            this.Surname.SendKeys(data.PersonDataPhone);
+            this.Email.SendKeys(data.PersonDataEmail);
+            if (data.PersonSendDataPhone)
+            {
+                this.Phone.SendKeys(data.PersonDataPhone);
+            }
+        }
     }
 }

@@ -85,5 +85,10 @@ namespace ATeam.Pages.RegisterProduct
 
         [FindsBy(How = How.CssSelector, Using = "button[value='Forward']")]
         public IWebElement Forward { get; set; }
+
+        public void Populate()
+        {
+            
+        }
     }
 }
