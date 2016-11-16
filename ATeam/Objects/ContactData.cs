@@ -27,8 +27,14 @@ namespace ATeam.Objects
             this.ContactPostCode = string.Format("0{0}-{1}", RandomDataHelper.GetRandomNumber(1), RandomDataHelper.GetRandomNumber(3));
             this.InvoiceCompanyName = RandomDataHelper.GetRandomString(5);
             this.InvoiceEmail = RandomDataHelper.GetRandomMail();
-            this.PersonDataSurname = RandomDataHelper.GetRandomString(5);
-            this.PersonDataSurname = RandomDataHelper.GetRandomString(5);
+            this.InvoiceAddress = RandomDataHelper.GetRandomString(5);
+            this.InvoiceCity = string.Format("Waw{0}", RandomDataHelper.GetRandomNumber(2));
+            this.InvoicePostalCode = string.Format("0{0}-{1}", RandomDataHelper.GetRandomNumber(1), RandomDataHelper.GetRandomNumber(3));
+            this.LetterCompanyName = RandomDataHelper.GetRandomString(5);
+            this.LetterAddress = RandomDataHelper.GetRandomString(5);
+            this.LetterCity = string.Format("Waw{0}", RandomDataHelper.GetRandomNumber(2));
+            this.LetterPostalCode = string.Format("0{0}-{1}", RandomDataHelper.GetRandomNumber(1), RandomDataHelper.GetRandomNumber(3));
+            this.Comment = string.Format("A-Team {0}", DateTime.Now);
         }
 
         public string PersonDataName { get; set; }

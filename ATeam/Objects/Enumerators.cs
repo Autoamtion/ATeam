@@ -12,4 +12,11 @@ namespace ATeam.Objects.Enumerators
         Digital,
         Paper
     }
+
+    public enum Examiner
+    {
+        None,
+        ATeam1,
+        ATeam2
+    }
 }

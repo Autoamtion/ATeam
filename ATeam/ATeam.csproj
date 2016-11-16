@@ -69,6 +69,7 @@
     <Compile Include="Objects\ContactData.cs" />
     <Compile Include="Objects\Enumerators.cs" />
     <Compile Include="Objects\InputData.cs" />
+    <Compile Include="Objects\SessionData.cs" />
     <Compile Include="Pages\Dashboard.cs" />
     <Compile Include="Pages\LandingPage.cs" />
     <Compile Include="Pages\Login.cs" />

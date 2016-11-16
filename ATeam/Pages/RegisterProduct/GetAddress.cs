@@ -8,6 +8,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace ATeam.Pages.RegisterProduct
 {
+    using ATeam.Helpers;
+    using ATeam.Objects;
+    using ATeam.Objects.Enumerators;
+
     public class GetAddress : Page
     {
         public GetAddress(IWebDriver webdriver) : base(webdriver)
@@ -86,9 +90,63 @@ namespace ATeam.Pages.RegisterProduct
         [FindsBy(How = How.CssSelector, Using = "button[value='Forward']")]
         public IWebElement Forward { get; set; }
 
-        public void Populate()
+        public void Populate(ContactData d)
         {
-            
+            this.Name.SendKeys(d.ContactName);
+            this.Surname.SendKeys(d.ContactSurname);
+            this.PostalCode.SendKeys(d.ContactPostCode);
+            this.City.SendKeys(d.ContactCity);
+            this.Address.SendKeys(d.ContactCity);
+            if (d.FillComment)
+            {
+                this.Comment.SendKeys(d.Comment);
+            }
+
+            switch (d.InvoiceType)
+            {
+                    case InvoiceType.None:
+                    this.InvoiceTypesNone.Click();
+                    break;
+                    case InvoiceType.Digital:
+                    this.InvoiceTypesElectronic.Click();
+                    this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
+                    this.InvoicePostalCode.SendKeys(d.InvoicePostalCode);
+                    this.InvoiceCity.SendKeys(d.InvoiceCity);
+                    this.InvoiceNip.SendKeys(d.InvoiceNip);
+                    this.InvoiceEmail.SendKeys(d.InvoiceEmail);
+                    break;
+                    case InvoiceType.Paper:
+                    this.InvoiceTypesElectronic.Click();
+                    this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
+                    this.InvoicePostalCode.SendKeys(d.InvoicePostalCode);
+                    this.InvoiceCity.SendKeys(d.InvoiceCity);
+                    this.InvoiceNip.SendKeys(d.InvoiceNip);
+                    if (d.InvoiceAddressIsTheSame != this.InvoiceAddressIsTheSame.Selected)
+                    {
+                        this.InvoiceAddressIsTheSame.Click();
+                    }
+
+                    if (!d.InvoiceAddressIsTheSame)
+                    {
+                        this.LetterCompanyName.WaitForElement(500);
+                        this.LetterCompanyName.SendKeys(d.LetterCompanyName);
+                        this.LetterPostalCode.SendKeys(d.LetterPostalCode);
+                        this.LetterCity.SendKeys(d.LetterCity);
+                        this.LetterAddress.SendKeys(d.LetterAddress);
+                    }
+
+                    break;
+            }
+
+            if (this.AcceptedPrivacyPolicy.Selected != d.AcceptedPrivacyPolicy)
+            {
+                this.AcceptedPrivacyPolicy.Click();
+            }
+
+            if (this.AcceptedMarketingPolicy.Selected != d.AcceptedMarketingPolicy)
+            {
+                this.AcceptedMarketingPolicy.Click();
+            }
         }
     }
 }

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ATeam.Pages.Session
 {
+    using ATeam.Helpers;
+    using ATeam.Objects;
+    using ATeam.Objects.Enumerators;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
 
@@ -129,5 +133,152 @@ namespace ATeam.Pages.Session
 
         [FindsBy(How = How.Name, Using = "SessionDto.SpaceForSession")]
         public IWebElement SpaceForSession { get; set; }
+
+        public void Populate(SessionData d)
+        {
+            this.SessionDtoDate.SendKeys(d.SessionDate);
+            this.LocationPostCode.SendKeys(d.PostCode);
+            this.LocationCity.SendKeys(d.City);
+            this.LocationAddress.SendKeys(d.Address);
+            if (d.FillComment)
+            {
+                this.AdditionalInformation.SendKeys(d.Comment);
+            }
+
+            if (d.IsSpacePerSession)
+            {
+                this.SpacePerSession.Click();
+                this.SpaceForSession.SendKeys(d.PlaceForSession.ToString());
+            }
+            else
+            {
+                this.SpacePerProduct.Click();
+            }
+
+            this.LevelSelect.Click();
+            this.LevelBase.WaitForElement(200);
+            if (d.LevelBase)
+            {
+                this.LevelBase.Click();
+            }
+
+            if (d.LevelAdvanced)
+            {
+                this.LevelAdvanced.Click();
+            }
+
+            if (d.LevelExpert)
+            {
+                this.LevelExpert.Click();
+            }
+
+            if (d.LevelOther)
+            {
+                this.LevelOther.Click();
+            }
+
+            this.LevelSelect.SendKeys(Keys.Escape);
+
+            if (d.IstqbFoundationLevelEnglishPolish)
+            {
+                this.IstqbFoundationLevelEnglishPolish.Click();
+            }
+
+            if (d.ReqbFoundationLevelEnglishPolish)
+            {
+                this.ReqbFoundationLevelEnglishPolish.Click();
+            }
+
+            if (d.IstqbAdvancedLevelTestManagerEnglishPolish)
+            {
+                this.IstqbAdvancedLevelTestManagerEnglishPolish.Click();
+            }
+
+            if (d.IstqbAdvancedLevelTestAnalystEnglishPolish)
+            {
+                this.IstqbAdvancedLevelTestAnalystEnglishPolish.Click();
+            }
+
+            if (d.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish)
+            {
+                this.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish.Click();
+            }
+
+            if (d.IstqbAgileTesterExtensionEnglishPolish)
+            {
+                this.IstqbAgileTesterExtensionEnglishPolish.Click();
+            }
+
+            if (d.IstqbTestManagementEnglish)
+            {
+                this.IstqbTestManagementEnglish.Click();
+            }
+
+            if (d.IstqbImprovingTheTestProcessEnglish)
+            {
+                this.IstqbImprovingTheTestProcessEnglish.Click();
+            }
+
+            this.ProductSelect.SendKeys(Keys.Escape);
+
+            if (!d.IsSpacePerSession)
+            {
+                if (d.IstqbFoundationLevelEnglishPolish)
+                {
+                    this.IstqbFoundationLevelPlaces.SendKeys(d.IstqbFoundationLevelPlaces.ToString());
+                }
+
+                if (d.ReqbFoundationLevelEnglishPolish)
+                {
+                    this.ReqbFoundationLevelPlaces.SendKeys(d.ReqbFoundationLevelPlaces.ToString());
+                }
+
+                if (d.IstqbAdvancedLevelTestManagerEnglishPolish)
+                {
+                    this.IstqbAdvancedLevelTestManagerPlaces.SendKeys(d.IstqbAdvancedLevelTestManagerPlaces.ToString());
+                }
+
+                if (d.IstqbAdvancedLevelTestAnalystEnglishPolish)
+                {
+                    this.IstqbAdvancedLevelTestAnalystPlaces.SendKeys(d.IstqbAdvancedLevelTestAnalystPlaces.ToString());
+                }
+
+                if (d.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish)
+                {
+                    this.IstqbAdvancedLevelTechnicalTestAnalystPlaces.SendKeys(d.IstqbAdvancedLevelTechnicalTestAnalystPlaces.ToString());
+                }
+
+                if (d.IstqbAgileTesterExtensionEnglishPolish)
+                {
+                    this.IstqbAgileTesterExtensionPlaces.SendKeys(d.IstqbAgileTesterExtensionPlaces.ToString());
+                }
+
+                if (d.IstqbTestManagementEnglish)
+                {
+                    this.IstqbTestManagementPlaces.SendKeys(d.IstqbTestManagementPlaces.ToString());
+                }
+
+                if (d.IstqbImprovingTheTestProcessEnglish)
+                {
+                    this.IstqbImprovingTheTestProcessPlaces.SendKeys(d.IstqbImprovingTheTestProcessPlaces.ToString());
+                }
+            }
+
+            this.ExaminerId.Click();
+            switch (d.ExaminerId)
+            {
+                    case Examiner.ATeam1:
+                    this.ExaminerAteam1.Click();
+                    break;
+                    case Examiner.ATeam2:
+                    this.ExaminerAteam2.Click();
+                    break;
+                    case Examiner.None:
+                    this.ExaminerNone.Click();
+                    break;
+            }
+
+            this.ExaminerId.SendKeys(Keys.Escape);
+        }
     }
 }
