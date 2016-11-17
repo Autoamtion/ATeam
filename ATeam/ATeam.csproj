@@ -62,6 +62,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\ObjectHelper.cs" />
+    <Compile Include="Helpers\Products.cs" />
     <Compile Include="Helpers\RandomDataHelper.cs" />
     <Compile Include="Helpers\WebDriverExtensions.cs" />
     <Compile Include="Helpers\WebElementExtensions.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Tests\AddSessionTests.cs" />
     <Compile Include="Tests\DashboardTests.cs" />
     <Compile Include="Tests\LandingTests.cs" />
+    <Compile Include="Tests\ProductTests.cs" />
     <Compile Include="Tests\RegistrationListTest.cs" />
     <Compile Include="Tests\IndividualDetailsTest.cs" />
     <Compile Include="Tests\ExamRegistrationTests.cs" />

@@ -175,5 +175,11 @@ namespace ATeam.Pages
             link.FocusAtElement(this.driver);
             link.Click();
         }
+
+        public void GotoProductPage()
+        {
+            this.ProductsLink.Click();
+        }
+
     }
 }
