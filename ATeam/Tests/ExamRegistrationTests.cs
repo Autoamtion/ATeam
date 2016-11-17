@@ -25,6 +25,24 @@ namespace ATeam.Tests
             var getAttendees = new GetAttendees(this.driver);
             getAttendees.Email.WaitForElement(1000);
             getAttendees.Populate(attendee);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            var attendee2 = new Attendee();
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee2);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            Assert.IsTrue(this.driver.GetVisibleText().Contains("2"));
+            getAttendees.Forward.Click();
+            var getPersonData = new GetPersonData(this.driver);
+            var personData = new ContactData();
+            getPersonData.Populate(personData);
+            getPersonData.Forward.Click();
+            var getAddress = new GetAddress(this.driver);
+            getAddress.Populate(personData);
+            getAddress.Forward.Click();
+            Assert.IsTrue(this.driver.GetVisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
+            Assert.IsTrue(this.driver.GetVisibleText().Contains(personData.PersonDataEmail));
         }
     }
 }
