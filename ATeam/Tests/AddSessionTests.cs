@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Net;
+using ATeam.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ATeam.Tests
@@ -18,24 +21,27 @@ namespace ATeam.Tests
             loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             var session = new AddSession(this.driver);
             session.SessionLink.Click();
-            var sessionDate = DateTime.Now.AddHours(3);
-            session.SessionDtoDate.SendKeys(sessionDate.ToString("dd.MM.yyyy HH:mm"));
-            session.LocationPostCode.SendKeys("00-867");
-            session.LocationCity.SendKeys("Warszawa");
-            session.LocationAddress.SendKeys("Złota 1");
-            session.AdditionalInformation.SendKeys("Automated test");
-            session.SpacePerProduct.Click();
-            session.LevelSelect.Click();
-            session.LevelAdvanced.Click();
-            session.LevelSelect.Click();
-            session.ProductSelect.Click();
-            session.IstqbAdvancedLevelTestManagerEnglishPolish.Click();
-            Assert.IsFalse(session.IstqbFoundationLevelEnglishPolish.Exists());
-            session.ProductSelect.Click();
-            session.IstqbAdvancedLevelTestManagerPlaces.SendKeys("5");
-            session.ExaminerId.Click();
-            session.ExaminerAteam1.Click();
+            var sessionData = new SessionData();
+            sessionData.IsSpacePerSession = false;
+            session.Populate(sessionData);
+            var text = this.driver.GetVisibleText();
+            Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("REQB Foundation Level / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Advanced Level Test Manager / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Advancel Level Test Analyst / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Advanced Level Technical Test Analyst / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Test Management / Angielski"));
+            Assert.IsTrue(text.Contains("ISTQB Improving the Test Process / Angielski"));
+            Assert.IsTrue(text.Contains("ISTQB Agile Tester Extension / Angielski, Polski"));
             session.SaveSession.Click();
+            text = this.driver.GetVisibleText();
+            Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("dd.MM.yyyy")));
+            Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("HH:mm")));
+            Assert.IsTrue(text.Contains("40"));
+            Assert.IsTrue(text.Contains(sessionData.PostCode));
+            Assert.IsTrue(text.Contains(sessionData.Address));
+            Assert.IsTrue(text.Contains(sessionData.City));
+            Assert.IsTrue(text.Contains("Ateam1 Test"));
         }
 
         [TestMethod]
@@ -46,26 +52,27 @@ namespace ATeam.Tests
             loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             var session = new AddSession(this.driver);
             session.SessionLink.Click();
-            var sessionDate = DateTime.Now.AddHours(3);
-            session.SessionDtoDate.SendKeys(sessionDate.ToString("dd.MM.yyyy HH:mm"));
-            session.LocationPostCode.SendKeys("00-867");
-            session.LocationCity.SendKeys("Warszawa");
-            session.LocationAddress.SendKeys("Złota 1");
-            session.AdditionalInformation.SendKeys("Automated test");
-            session.SpacePerSession.Click();
-            session.SpaceForSession.SendKeys("5");
-            session.LevelSelect.Click();
-            session.LevelOther.Click();
-            session.LevelBase.Click();
-            session.LevelExpert.Click();
-            session.LevelAdvanced.Click();
-            session.LevelSelect.Click();
-            session.ProductSelect.Click();
-            session.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish.Click();
-            Assert.IsTrue(session.IstqbFoundationLevelEnglishPolish.Exists());
-            session.ExaminerId.Click();
-            session.ExaminerAteam1.Click();
+            var sessionData = new SessionData();
+            sessionData.IsSpacePerSession = true;
+            session.Populate(sessionData);
+            var text = this.driver.GetVisibleText();
+            Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("REQB Foundation Level / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Advanced Level Test Manager / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Advancel Level Test Analyst / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Advanced Level Technical Test Analyst / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Test Management / Angielski"));
+            Assert.IsTrue(text.Contains("ISTQB Improving the Test Process / Angielski"));
+            Assert.IsTrue(text.Contains("ISTQB Agile Tester Extension / Angielski, Polski"));
             session.SaveSession.Click();
+            text = this.driver.GetVisibleText();
+            Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("dd.MM.yyyy")));
+            Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("HH:mm")));
+            Assert.IsTrue(text.Contains(sessionData.PlaceForSession.ToString()));
+            Assert.IsTrue(text.Contains(sessionData.PostCode));
+            Assert.IsTrue(text.Contains(sessionData.Address));
+            Assert.IsTrue(text.Contains(sessionData.City));
+            Assert.IsTrue(text.Contains("Ateam1 Test"));
         }
     }
 }

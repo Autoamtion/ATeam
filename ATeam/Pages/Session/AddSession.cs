@@ -136,7 +136,7 @@ namespace ATeam.Pages.Session
 
         public void Populate(SessionData d)
         {
-            this.SessionDtoDate.SendKeys(d.SessionDate);
+            this.SessionDtoDate.SendKeys(d.SessionDate.ToString("dd.MM.yyyy HH:mm"));
             this.LocationPostCode.SendKeys(d.PostCode);
             this.LocationCity.SendKeys(d.City);
             this.LocationAddress.SendKeys(d.Address);
@@ -156,7 +156,7 @@ namespace ATeam.Pages.Session
             }
 
             this.LevelSelect.Click();
-            this.LevelBase.WaitForElement(200);
+            this.LevelBase.WaitForElement(500);
             if (d.LevelBase)
             {
                 this.LevelBase.Click();
@@ -176,9 +176,10 @@ namespace ATeam.Pages.Session
             {
                 this.LevelOther.Click();
             }
-
+            this.LevelSelect.Click();
             this.LevelSelect.SendKeys(Keys.Escape);
-
+            this.ProductSelect.Click();
+            this.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish.WaitForElement(500);
             if (d.IstqbFoundationLevelEnglishPolish)
             {
                 this.IstqbFoundationLevelEnglishPolish.Click();
@@ -278,6 +279,7 @@ namespace ATeam.Pages.Session
                     break;
             }
 
+            this.ExaminerId.Click();
             this.ExaminerId.SendKeys(Keys.Escape);
         }
     }

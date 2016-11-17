@@ -16,14 +16,14 @@ namespace ATeam.Objects
         public SessionData()
         {
             ObjectHelper.SetDefaultValues(this);
-            this.SessionDate = DateTime.Now.AddHours(3).ToString("dd.MM.yyyy HH:mm");
+            this.SessionDate = DateTime.Now.AddHours(3);
             this.Address = RandomDataHelper.GetRandomString(5);
             this.City = string.Format("Waw{0}", RandomDataHelper.GetRandomNumber(2));
             this.PostCode = string.Format("0{0}-{1}", RandomDataHelper.GetRandomNumber(1), RandomDataHelper.GetRandomNumber(3));
             this.Comment = string.Format("A-Team {0}", DateTime.Now);
         }
 
-        public string SessionDate { get; set; }
+        public DateTime SessionDate { get; set; }
 
         public string PostCode { get; set; }
 

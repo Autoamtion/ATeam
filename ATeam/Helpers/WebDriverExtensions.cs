@@ -87,5 +87,10 @@ namespace ATeam.Helpers
                 return false;
             }
         }
+
+        public static string GetVisibleText(this IWebDriver webDriver)
+        {
+            return webDriver.FindElement(By.TagName("body")).Text;
+        }
     }
 }
