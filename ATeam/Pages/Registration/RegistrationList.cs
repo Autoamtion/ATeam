@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using ATeam.Helpers;
 using OpenQA.Selenium;
@@ -57,10 +58,7 @@ namespace ATeam.Pages.Registration
 
         public SelectElement RecordsDropDownList
         {
-            get
-            {
-                return new SelectElement(this.RecordsSelectList);
-            }
+            get { return new SelectElement(this.RecordsSelectList); }
         }
 
         public int GetRecordsCountOnPage()
@@ -79,9 +77,39 @@ namespace ATeam.Pages.Registration
             this.RecordActionElementClick(record, By.CssSelector("a[href*='/ateam/Registration/IndividualDetails']"));
         }
 
+        public void GoToIndividualDetailsOfRecord(string fName, string lName, string fCompany, DateTime date, string place)
+        {
+            var record = this.CheckRecordExists(fName, lName, fCompany, date, place);
+            if (record > -1)
+            {
+                this.GoToIndividualDetailsOfRecord(record);
+            }
+        }
+
         public void DeleteRecord(int record)
         {
             this.RecordActionElementClick(record, By.ClassName("js-registration-delete"));
+        }
+
+        public int CheckRecordExists(string fName, string lName, string fCompany, DateTime date, string place)
+        {
+            var regListTable = this.driver.FindElement(By.CssSelector("#DataTables_Table_0"));
+            regListTable.FocusAtElement(this.driver);
+            Thread.Sleep(500);
+            var records = regListTable.FindElements(By.CssSelector("tbody tr[role='row']"));
+            var row = records.FirstOrDefault(r =>
+                r.Text.Contains(fName)
+                && r.Text.Contains(lName)
+                && r.Text.Contains(fCompany)
+                && r.Text.Contains(date.ToString("dd.MM.yyyy HH:mm"))
+                && r.Text.Contains(place));
+
+            if (row != null)
+            {
+                return records.IndexOf(row) + 1;
+            }
+
+            return -1;
         }
 
         private void RecordActionElementClick(int record, By selector)
@@ -94,4 +122,4 @@ namespace ATeam.Pages.Registration
             links[record - 1].Click();
         }
     }
-}
+} 

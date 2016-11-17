@@ -16,9 +16,9 @@ namespace ATeam.Tests
             this.GetToRegistrationListPage(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             var registrationList = new RegistrationList(this.driver);
             registrationList.RecordsDropDownList.SelectByText("50");
-            registrationList.Search.SendKeys("test");
             this.driver.WaitForAjax();
-            Assert.AreEqual(0, registrationList.GetRecordsCountOnPage(), "Unexpected records displayed. Search functionality does not work!");
+            var record = registrationList.CheckRecordExists("asd", "qwe", string.Empty, new DateTime(2016, 11, 26, 16, 36, 0), "waw123");
+            registrationList.GoToIndividualDetailsOfRecord(record);
         }
 
         [TestMethod]
