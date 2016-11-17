@@ -77,6 +77,7 @@ namespace ATeam.Pages
         [FindsBy(How = How.LinkText, Using = "Następna")]
         public IWebElement NextRecordsPage { get; set; }
 
+
         public SelectElement RecordsDropDownList
         {
             get

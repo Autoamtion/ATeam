@@ -8,6 +8,8 @@ using OpenQA.Selenium.IE;
 
 namespace ATeam.Pages
 {
+    using ATeam.Helpers;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
 
@@ -60,6 +62,15 @@ namespace ATeam.Pages
             {
                 var body = this.driver.FindElement(By.TagName("body"));
                 return body.Text;
+            }
+        }
+
+        public void Logout()
+        {
+            if (this.UserMenu.Exists())
+            {
+                this.UserMenu.Click();
+                this.Logoff.Click();
             }
         }
     }
