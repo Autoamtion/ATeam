@@ -88,7 +88,7 @@ namespace ATeam.Helpers
             }
         }
 
-        public static string GetVisibleText(this IWebDriver webDriver)
+        public static string VisibleText(this IWebDriver webDriver)
         {
             return webDriver.FindElement(By.TagName("body")).Text;
         }

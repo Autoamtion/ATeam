@@ -24,7 +24,7 @@ namespace ATeam.Tests
             var sessionData = new SessionData();
             sessionData.IsSpacePerSession = false;
             session.Populate(sessionData);
-            var text = this.driver.GetVisibleText();
+            var text = this.driver.VisibleText();
             Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
             Assert.IsTrue(text.Contains("REQB Foundation Level / Angielski, Polski"));
             Assert.IsTrue(text.Contains("ISTQB Advanced Level Test Manager / Angielski, Polski"));
@@ -34,7 +34,7 @@ namespace ATeam.Tests
             Assert.IsTrue(text.Contains("ISTQB Improving the Test Process / Angielski"));
             Assert.IsTrue(text.Contains("ISTQB Agile Tester Extension / Angielski, Polski"));
             session.SaveSession.Click();
-            text = this.driver.GetVisibleText();
+            text = this.driver.VisibleText();
             Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("dd.MM.yyyy")));
             Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("HH:mm")));
             Assert.IsTrue(text.Contains("40"));
@@ -55,7 +55,7 @@ namespace ATeam.Tests
             var sessionData = new SessionData();
             sessionData.IsSpacePerSession = true;
             session.Populate(sessionData);
-            var text = this.driver.GetVisibleText();
+            var text = this.driver.VisibleText();
             Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
             Assert.IsTrue(text.Contains("REQB Foundation Level / Angielski, Polski"));
             Assert.IsTrue(text.Contains("ISTQB Advanced Level Test Manager / Angielski, Polski"));
@@ -65,7 +65,7 @@ namespace ATeam.Tests
             Assert.IsTrue(text.Contains("ISTQB Improving the Test Process / Angielski"));
             Assert.IsTrue(text.Contains("ISTQB Agile Tester Extension / Angielski, Polski"));
             session.SaveSession.Click();
-            text = this.driver.GetVisibleText();
+            text = this.driver.VisibleText();
             Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("dd.MM.yyyy")));
             Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("HH:mm")));
             Assert.IsTrue(text.Contains(sessionData.PlaceForSession.ToString()));

@@ -92,11 +92,12 @@ namespace ATeam.Pages.RegisterProduct
 
         public void Populate(ContactData d)
         {
+            this.Name.WaitForElement(1000);
             this.Name.SendKeys(d.ContactName);
             this.Surname.SendKeys(d.ContactSurname);
             this.PostalCode.SendKeys(d.ContactPostCode);
             this.City.SendKeys(d.ContactCity);
-            this.Address.SendKeys(d.ContactCity);
+            this.Address.SendKeys(d.ContactAddress);
             if (d.FillComment)
             {
                 this.Comment.SendKeys(d.Comment);
@@ -109,18 +110,26 @@ namespace ATeam.Pages.RegisterProduct
                     break;
                     case InvoiceType.Digital:
                     this.InvoiceTypesElectronic.Click();
+                    this.InvoicePostalCode.Clear();
                     this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
                     this.InvoicePostalCode.SendKeys(d.InvoicePostalCode);
+                    this.InvoiceCity.Clear();
                     this.InvoiceCity.SendKeys(d.InvoiceCity);
+                    this.InvoiceAddress.Clear();
+                    this.InvoiceAddress.SendKeys(d.InvoiceAddress);
                     this.InvoiceNip.SendKeys(d.InvoiceNip);
                     this.InvoiceEmail.SendKeys(d.InvoiceEmail);
                     break;
                     case InvoiceType.Paper:
-                    this.InvoiceTypesElectronic.Click();
+                    this.InvoiceTypesPaper.Click();
                     this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
+                    this.InvoicePostalCode.Clear();
                     this.InvoicePostalCode.SendKeys(d.InvoicePostalCode);
+                    this.InvoiceCity.Click();
                     this.InvoiceCity.SendKeys(d.InvoiceCity);
                     this.InvoiceNip.SendKeys(d.InvoiceNip);
+                    this.InvoiceAddress.Clear();
+                    this.InvoiceAddress.SendKeys(d.InvoiceAddress);
                     if (d.InvoiceAddressIsTheSame != this.InvoiceAddressIsTheSame.Selected)
                     {
                         this.InvoiceAddressIsTheSame.Click();

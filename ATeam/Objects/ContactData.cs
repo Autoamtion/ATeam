@@ -35,6 +35,7 @@ namespace ATeam.Objects
             this.LetterCity = string.Format("Waw{0}", RandomDataHelper.GetRandomNumber(2));
             this.LetterPostalCode = string.Format("0{0}-{1}", RandomDataHelper.GetRandomNumber(1), RandomDataHelper.GetRandomNumber(3));
             this.Comment = string.Format("A-Team {0}", DateTime.Now);
+            this.InvoiceNip = RandomDataHelper.GetRandomNip();
         }
 
         public string PersonDataName { get; set; }
@@ -74,6 +75,7 @@ namespace ATeam.Objects
 
         public string InvoiceAddress { get; set; }
 
+        [DefaultValue("9340983644")]
         public string InvoiceNip { get; set; }
 
         public string InvoiceEmail { get; set; }
