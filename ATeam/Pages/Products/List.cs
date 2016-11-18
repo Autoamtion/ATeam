@@ -87,7 +87,7 @@ namespace ATeam.Pages.Products
             
         }
 
-        private void ProductsRowsIterationHelper(int column,string text)
+        private void ProductsRowsIterationHelper(int column, string text)
         {
             foreach (var product in ProductList)
             {
@@ -96,6 +96,7 @@ namespace ATeam.Pages.Products
                     continue;
                 }
                 product.FindElements(By.TagName("td"))[7].Click();
+                break;
             }
         }
     }

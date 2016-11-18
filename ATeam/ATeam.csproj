@@ -86,6 +86,7 @@
     <Compile Include="Pages\RegisterProduct\GetPersonData.cs" />
     <Compile Include="Pages\Registration\RegistrationList.cs" />
     <Compile Include="Pages\Session\AddSession.cs" />
+    <Compile Include="Pages\Session\Details.cs" />
     <Compile Include="Pages\UserProfileEdit.cs" />
     <Compile Include="Tests\LoginTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

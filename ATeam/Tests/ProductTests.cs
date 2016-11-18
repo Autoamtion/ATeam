@@ -29,7 +29,8 @@ namespace ATeam.Tests
            // var products = productList.GetCellFromRecord(2, 2);
             //Debug.WriteLine(products.Text);
             this.driver.WaitForAjax();
-            productList.GetProductDetailsByName("ISTQB Advanced Level Technical Test Analyst");
+            productList.GetProductDetailsByName("ISTQB Foundation Level");
+            //productList.GetProductDetailsByName("ISTQB Advanced Level Technical Test Analyst");
            
             Thread.Sleep(4000);
         }
