@@ -52,11 +52,13 @@
         public void ActivateSession()
         {
             this.SessionActivator.Click();
+            Helpers.WebDriverExtensions.AlertHandling(driver);
         }
 
         public void AllInvoicesSent()
         {
             this.InvoicesSent.Click();
+            Helpers.WebDriverExtensions.AlertHandling(driver);
         }
 
         public string GetExamineer()
@@ -87,16 +89,19 @@
         public void LastStep()
         {
             this.AllStepsCompleted.Click();
+            Helpers.WebDriverExtensions.AlertHandling(driver);
         }
 
         public void ReceiveExamProtocol()
         {
             this.ReceiveExamProtocols.Click();
+            Helpers.WebDriverExtensions.AlertHandling(driver);
         }
 
         public void SendAttendeesInfo()
         {
             this.SendInfoAboutAttendeeToExaminer.Click();
+            Helpers.WebDriverExtensions.AlertHandling(driver);
         }
     }
 }
