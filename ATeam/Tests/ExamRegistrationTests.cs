@@ -182,6 +182,13 @@ namespace ATeam.Tests
             getAddress.Forward.Click();
             Assert.IsTrue(this.driver.VisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
             Assert.IsTrue(this.driver.VisibleText().Contains(personData.PersonDataEmail));
+            getAddress.PgsLogo.Click();
+            startPage.LoginLink.Click();
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            dashboard.CompanyColumnHeader.WaitForElement(1000);
+            Assert.IsTrue(dashboard.CheckSessionExistsOnDate(sessionData.SessionDate, sessionData.City));
+            dashboard.ClickSessionLink(sessionData.City);
+            Assert.AreEqual(8, dashboard.GetFreeSpaceCountFromSessionPopup());
         }
     }
 }
