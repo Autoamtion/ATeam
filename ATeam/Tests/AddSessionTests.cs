@@ -127,6 +127,7 @@ namespace ATeam.Tests
             Assert.IsTrue(text.Contains(sessionData.Address));
             Assert.IsTrue(text.Contains(sessionData.City));
             Assert.IsTrue(text.Contains("Ateam1 Test"));
+            var sessionId = this.driver.Url.Substring(this.driver.Url.LastIndexOf("/") + 1);
         }
 
         [TestMethod]

@@ -109,6 +109,8 @@ namespace ATeam.Tests
             getPersonData.Populate(personData);
             getPersonData.Forward.Click();
             var getAddress = new GetAddress(this.driver);
+            getAddress.Name.WaitForElement(1000);
+            getAddress.Forward.Click();
             getAddress.Forward.Click();
             text = this.driver.VisibleText();
             Assert.IsTrue(text.Contains("Pole Imię jest wymagane"));
@@ -189,6 +191,7 @@ namespace ATeam.Tests
             dashboard.CompanyColumnHeader.WaitForElement(1000);
             Assert.IsTrue(dashboard.CheckSessionExistsOnDate(sessionData.SessionDate, sessionData.City));
             dashboard.ClickSessionLink(sessionData.City);
+            dashboard.SessionDetailsLink.WaitForElement(1000);
             Assert.AreEqual(8, dashboard.GetFreeSpaceCountFromSessionPopup());
         }
 
