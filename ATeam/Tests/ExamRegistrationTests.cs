@@ -12,6 +12,7 @@ namespace ATeam.Tests
     using ATeam.Pages;
     using ATeam.Pages.RegisterProduct;
     using OpenQA.Selenium;
+    using System.Threading;
 
     [TestClass]
     public class ExamRegistrationTests : BaseTest
@@ -162,6 +163,7 @@ namespace ATeam.Tests
             sessionDetails.UserMenu.Click();
             sessionDetails.Logoff.Click();
             var landingPage  = new LandingPage(this.driver);
+
             var groupRegistration = landingPage.GroupRegistration.Where(x => x.GetAttribute("data-session").Equals(sessionId)).ToList();
             if (!groupRegistration.Any())
             {
@@ -169,6 +171,14 @@ namespace ATeam.Tests
             }
 
             groupRegistration.FirstOrDefault().Click();
+
+            /*landingPage.PgsLogo.Click();
+            Thread.Sleep(500);
+            var sid = landingPage.GetExistingSessionIdWithFreePlacesAndManyExams(3, 2);
+            var examButton = this.driver.FindElement(By.CssSelector(string.Format("div[data-session='{0}']", sid)));
+            examButton.FocusAtElement(this.driver);
+            examButton.Click();*/
+
             var getAttendees = new GetAttendees(this.driver);
             var attendee = new Attendee();
             getAttendees.Email.WaitForElement(1000);
