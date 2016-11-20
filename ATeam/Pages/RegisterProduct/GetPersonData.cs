@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATeam.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -36,6 +37,7 @@ namespace ATeam.Pages.RegisterProduct
 
         public void Populate(ContactData data)
         {
+            this.Name.WaitForElement(1000);
             this.Name.SendKeys(data.PersonDataName);
             this.Surname.SendKeys(data.PersonDataPhone);
             this.Email.SendKeys(data.PersonDataEmail);

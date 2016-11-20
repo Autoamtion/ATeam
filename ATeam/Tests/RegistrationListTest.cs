@@ -11,32 +11,21 @@ namespace ATeam.Tests
     public class RegistrationListTest : BaseTest
     {
         [TestMethod]
-        public void RegistrationListTestMethod()
-        {
-            this.GetToRegistrationListPage(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
-            var registrationList = new RegistrationList(this.driver);
-            registrationList.RecordsDropDownList.SelectByText("50");
-            this.driver.WaitForAjax();
-            var record = registrationList.CheckRecordExists("asd", "qwe", string.Empty, new DateTime(2016, 11, 26, 16, 36, 0), "waw123");
-            registrationList.GoToIndividualDetailsOfRecord(record);
-        }
-
-        [TestMethod]
-        public virtual void DashboardPageCheckPgsLogo()
+        public virtual void RegistrationLisPageCheckPgsLogo()
         {
             this.GetToRegistrationListPage(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             base.CheckPgsLogoExists(new RegistrationList(this.driver));
         }
 
         [TestMethod]
-        public virtual void DashboardPageCheckAvailableLanguageOptions()
+        public virtual void RegistrationLisPageCheckAvailableLanguageOptions()
         {
             this.GetToRegistrationListPage(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             base.CheckAvailableLanguageOptions(new RegistrationList(this.driver));
         }
 
         [TestMethod]
-        public virtual void DashboardPageCheckAvailableUserMenuOptions()
+        public virtual void DashboarRegistrationLisPageCheckAvailableUserMenuOptions()
         {
             this.GetToRegistrationListPage(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             base.CheckAvailableUserMenuOptions(new RegistrationList(this.driver));

@@ -1,5 +1,6 @@
 ﻿using System;
 using ATeam.Objects.Enumerators;
+using ATeam.Pages.Session;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ATeam.Tests
@@ -122,6 +123,72 @@ namespace ATeam.Tests
             getAddress.Forward.Click();
             Assert.IsTrue(this.driver.VisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
             Assert.IsTrue(this.driver.VisibleText().Contains(personData.PersonDataEmail));
+        }
+
+        [TestMethod]
+        public void RegisterExamWithoutLogin()
+        {
+            var startPage = new LandingPage(this.driver, true);
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            var session = new AddSession(this.driver);
+            var sessionData = new SessionData();
+            var dashboard = new Dashboard(this.driver);
+            dashboard.AddSessionButton.Click();
+            sessionData.IsSpacePerSession = false;
+            sessionData.LevelOther = false;
+            sessionData.LevelAdvanced = false;
+            sessionData.LevelExpert = false;
+            sessionData.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish = false;
+            sessionData.IstqbAdvancedLevelTestAnalystEnglishPolish = false;
+            sessionData.IstqbAdvancedLevelTestManagerEnglishPolish = false;
+            sessionData.IstqbTestManagementEnglish = false;
+            sessionData.IstqbAgileTesterExtensionEnglishPolish = false;
+            sessionData.IstqbImprovingTheTestProcessEnglish = false;
+            session.Populate(sessionData);
+            session.SaveSession.Click();
+            var sessionId = this.driver.Url.Substring(this.driver.Url.LastIndexOf("/") + 1);
+            var sessionDetails = new Details(this.driver);
+            sessionDetails.ActivateSession();
+            sessionDetails.UserMenu.Click();
+            sessionDetails.Logoff.Click();
+            var landingPage  = new LandingPage(this.driver);
+            var groupRegistration = landingPage.GroupRegistration.Where(x => x.GetAttribute("data-session").Equals(sessionId)).ToList();
+            if (!groupRegistration.Any())
+            {
+                throw new Exception("Exam is not available for registration for logged off user");
+            }
+
+            groupRegistration.FirstOrDefault().Click();
+            var getAttendees = new GetAttendees(this.driver);
+            var attendee = new Attendee();
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            var attendee2 = new Attendee();
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee2);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("2"));
+            getAttendees.Forward.Click();
+            var getPersonData = new GetPersonData(this.driver);
+            var personData = new ContactData();
+            getPersonData.Populate(personData);
+            getPersonData.Forward.Click();
+            var getAddress = new GetAddress(this.driver);
+            getAddress.Populate(personData);
+            getAddress.Forward.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
+            Assert.IsTrue(this.driver.VisibleText().Contains(personData.PersonDataEmail));
+            getAddress.PgsLogo.Click();
+            startPage.LoginLink.Click();
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            dashboard.CompanyColumnHeader.WaitForElement(1000);
+            Assert.IsTrue(dashboard.CheckSessionExistsOnDate(sessionData.SessionDate, sessionData.City));
+            dashboard.ClickSessionLink(sessionData.City);
+            Assert.AreEqual(8, dashboard.GetFreeSpaceCountFromSessionPopup());
         }
     }
 }
