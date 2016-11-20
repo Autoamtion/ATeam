@@ -49,5 +49,27 @@ namespace ATeam.Pages.Session
 
             return examsIds;
         }
+
+        public int GetExamIdByName(string examName)
+        {
+            try
+            {
+                var allExamRecords = this.driver.FindElements(By.ClassName("Exam-examItem"));
+                foreach(var exam in allExamRecords)
+                {
+                    if(exam.Text.StartsWith(examName))
+                    {
+                        var examId = exam.FindElement(By.ClassName("Exam-examItemLink")).GetAttribute("data-productid");
+                        return int.Parse(examId);
+                    }
+                }
+
+                return -1;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
     }
 }
