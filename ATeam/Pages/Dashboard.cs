@@ -4,6 +4,7 @@ using ATeam.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System.Threading;
 
 namespace ATeam.Pages
 {
@@ -128,6 +129,7 @@ namespace ATeam.Pages
         public bool CheckSessionExistsOnDate(DateTime checkDate, string cityName)
         {
             this.SwitchMonthByDate(checkDate);
+            Thread.Sleep(1000);
             var sessionLink = this.driver.FindElement(By.XPath(string.Format("//span[contains(@class, 'fc-title') and text() = '{0}']", cityName)));
             if (!sessionLink.Exists())
             {
