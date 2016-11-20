@@ -21,15 +21,34 @@ namespace ATeam.Tests
         }
 
         [TestMethod]
-        public void CheckRegistrationButtonIsActiveAndOrange()
+        public void CheckRegistrationButtonIsActive()
         {
             this.CreateSessionToCheckButtonsAvailability();
         }
 
         [TestMethod]
-        public void CheckRegistrationButtonIsActiveAndOrangeAfterLogout()
+        public void CheckRegistrationButtonIsActiveAfterLogout()
         {
             this.CreateSessionToCheckButtonsAvailability(true);
+        }
+
+        [TestMethod]
+        public void CheckRegisterButtonIsOrange()
+        {
+            var startPage = new LandingPage(this.driver);
+            var regBtn = this.driver.FindElement(By.CssSelector("div[data-session]"));
+            Assert.AreEqual("rgba(255, 119, 38, 1)", regBtn.GetCssValue("background-color"), "Registration button colour is not orange");
+        }
+
+        [TestMethod]
+        public void CheckRegisterButtonIsOrangeLoggedUser()
+        {
+            var startPage = new LandingPage(this.driver);
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            this.driver.Navigate().GoToUrl(Properties.Settings.Default.StartUrl);
+            var regBtn = this.driver.FindElement(By.CssSelector("div[data-session]"));
+            Assert.AreEqual("rgba(255, 119, 38, 1)", regBtn.GetCssValue("background-color"), "Registration button colour is not orange");
         }
 
         private void CreateSessionToCheckButtonsAvailability(bool logoff = false)
@@ -64,8 +83,7 @@ namespace ATeam.Tests
             
             var registrationButton = this.driver.FindElement(By.CssSelector(string.Format("div[data-session='{0}']", sessionIdNumber)));
             Assert.IsTrue(registrationButton.Exists() && registrationButton.Displayed, string.Format("Group registration button for session with ID {0} is not displayed", sessionIdNumber));
-            Assert.AreEqual("rgba(255, 119, 38, 1)", registrationButton.GetCssValue("background-color"), "Registration button colour is not orange");
-
+            
             foreach (var examId in examsIds)
             {
                 registrationButton = this.driver.FindElement(By.CssSelector(string.Format("td[data-productsessionid='{0}']", examId)));
