@@ -21,7 +21,18 @@ namespace ATeam.Tests
         }
 
         [TestMethod]
-        public void CheckRegistrationButtonsAreActive()
+        public void CheckRegistrationButtonIsActiveAndOrange()
+        {
+            this.CreateSessionToCheckButtonsAvailability();
+        }
+
+        [TestMethod]
+        public void CheckRegistrationButtonIsActiveAndOrangeAfterLogout()
+        {
+            this.CreateSessionToCheckButtonsAvailability(true);
+        }
+
+        private void CreateSessionToCheckButtonsAvailability(bool logoff = false)
         {
             var startPage = new LandingPage(this.driver, true);
             var loginPage = new Login(this.driver);
@@ -35,7 +46,6 @@ namespace ATeam.Tests
             var sessionId = this.driver.Url.Substring(this.driver.Url.LastIndexOf("/") + 1);
             var sessionIdNumber = -1;
             Assert.IsTrue(!string.IsNullOrEmpty(sessionId) && int.TryParse(sessionId, NumberStyles.Integer, CultureInfo.InvariantCulture, out sessionIdNumber), "Session has not been created!");
-
             var sessionDetails = new Details(this.driver);
             sessionDetails.ActivateSession();
             Thread.Sleep(1000);
@@ -44,10 +54,17 @@ namespace ATeam.Tests
             sessionDetails.ExamsBtn.Click();
             var sessionExmas = new Exams(this.driver);
             var examsIds = sessionExmas.GetExamsIds();
-
             this.driver.Navigate().GoToUrl(Properties.Settings.Default.StartUrl);
+
+            if (logoff)
+            {
+                sessionDetails.UserMenu.Click();
+                sessionDetails.Logoff.Click();
+            }
+            
             var registrationButton = this.driver.FindElement(By.CssSelector(string.Format("div[data-session='{0}']", sessionIdNumber)));
             Assert.IsTrue(registrationButton.Exists() && registrationButton.Displayed, string.Format("Group registration button for session with ID {0} is not displayed", sessionIdNumber));
+            Assert.AreEqual("rgba(255, 119, 38, 1)", registrationButton.GetCssValue("background-color"), "Registration button colour is not orange");
 
             foreach (var examId in examsIds)
             {
