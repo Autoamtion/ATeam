@@ -128,5 +128,45 @@ namespace ATeam.Tests
             Assert.IsTrue(text.Contains(sessionData.City));
             Assert.IsTrue(text.Contains("Ateam1 Test"));
         }
+
+        [TestMethod]
+        public void CreateSessionForFewTypesAtSameLevel()
+        {
+            var startPage = new LandingPage(this.driver, true);
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            var session = new AddSession(this.driver);
+            session.SessionLink.Click();
+            var sessionData = new SessionData();
+            sessionData.IsSpacePerSession = true;
+            sessionData.LevelAdvanced = false;
+            sessionData.LevelExpert = false;
+            sessionData.LevelOther = false;
+            sessionData.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish = false;
+            sessionData.IstqbAdvancedLevelTestAnalystEnglishPolish = false;
+            sessionData.IstqbAdvancedLevelTestManagerEnglishPolish = false;
+            sessionData.IstqbAgileTesterExtensionEnglishPolish = false;
+            sessionData.IstqbImprovingTheTestProcessEnglish = false;
+            sessionData.IstqbTestManagementEnglish = false;
+            session.Populate(sessionData);
+            var text = this.driver.VisibleText();
+            Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("REQB Foundation Level / Angielski, Polski"));
+            session.SaveSession.Click();
+            text = this.driver.VisibleText();
+            Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("dd.MM.yyyy")));
+            Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("HH:mm")));
+            Assert.IsTrue(text.Contains(sessionData.PlaceForSession.ToString()));
+            Assert.IsTrue(text.Contains(sessionData.PostCode));
+            Assert.IsTrue(text.Contains(sessionData.Address));
+            Assert.IsTrue(text.Contains(sessionData.City));
+            Assert.IsTrue(text.Contains("Ateam1 Test"));
+
+            var sessionDetails = new Details(this.driver);
+            sessionDetails.ExamsBtn.Click();
+
+            var examsPage = new Exams(this.driver);
+            Assert.AreEqual(2, examsPage.GetExamsIds().Count, "Not all selected products are included in session exams list!");
+        }
     }
 }
