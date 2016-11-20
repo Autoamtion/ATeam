@@ -26,7 +26,7 @@ namespace ATeam.Tests
             startPage.PgsLogo.Click();
 
             //startPage.GroupRegistration.First().Click();
-            var sessionId = startPage.GetExistingSessionIdWithFreePlacesAndManyExams(3, 2);
+            var sessionId = startPage.GetExistingSessionIdWithFreePlacesAndManyExams(4, 2);
             var examButton = this.driver.FindElement(By.CssSelector(string.Format("div[data-session='{0}']", sessionId)));
             examButton.FocusAtElement(this.driver);
             examButton.Click();
@@ -42,7 +42,7 @@ namespace ATeam.Tests
             getAttendees.Populate(attendee2);
             Assert.IsTrue(getAttendees.AddUserToList.Displayed);
             getAttendees.AddUserToList.Click();
-            Assert.IsTrue(this.driver.VisibleText().Contains("2"));
+            Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n2"));
             getAttendees.Forward.Click();
             var getPersonData = new GetPersonData(this.driver);
             var personData = new ContactData();
@@ -205,6 +205,7 @@ namespace ATeam.Tests
             startPage.LoginLink.Click();
             loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
             dashboard.CompanyColumnHeader.WaitForElement(1000);
+            Thread.Sleep(500);
             Assert.IsTrue(dashboard.CheckSessionExistsOnDate(sessionData.SessionDate, sessionData.City));
             dashboard.ClickSessionLink(sessionData.City);
             dashboard.SessionDetailsLink.WaitForElement(1000);

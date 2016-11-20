@@ -43,13 +43,16 @@ namespace ATeam.Pages
             foreach(var session in sessions)
             {
                 var visibleText = session.Text;
-                var regExp = new Regex(freePlacesRegExp, RegexOptions.IgnoreCase);
-                var freePlaces = int.Parse(regExp.Match(visibleText).Groups[1].Value);
-                var examsCount = new Regex(indRegistration, RegexOptions.IgnoreCase).Matches(visibleText).Count;
-
-                if (freePlaces >= minPlaces && examsCount >= minExams)
+                if (!visibleText.Contains("nieaktywna"))
                 {
-                    return int.Parse(session.FindElement(By.CssSelector("div[data-session]")).GetAttribute("data-session"));
+                    var regExp = new Regex(freePlacesRegExp, RegexOptions.IgnoreCase);
+                    var freePlaces = int.Parse(regExp.Match(visibleText).Groups[1].Value);
+                    var examsCount = new Regex(indRegistration, RegexOptions.IgnoreCase).Matches(visibleText).Count;
+
+                    if (freePlaces >= minPlaces && examsCount >= minExams)
+                    {
+                        return int.Parse(session.FindElement(By.CssSelector("div[data-session]")).GetAttribute("data-session"));
+                    }
                 }
             }
 
