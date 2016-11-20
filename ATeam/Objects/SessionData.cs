@@ -18,7 +18,7 @@ namespace ATeam.Objects
             ObjectHelper.SetDefaultValues(this);
             this.SessionDate = DateTime.Now.AddHours(3);
             this.Address = RandomDataHelper.GetRandomString(5);
-            this.City = string.Format("Waw{0}", RandomDataHelper.GetRandomNumber(2));
+            this.City = string.Format("Waw{0}", RandomDataHelper.GetRandomString(5));
             this.PostCode = string.Format("0{0}-{1}", RandomDataHelper.GetRandomNumber(1), RandomDataHelper.GetRandomNumber(3));
             this.Comment = string.Format("A-Team {0}", DateTime.Now);
         }

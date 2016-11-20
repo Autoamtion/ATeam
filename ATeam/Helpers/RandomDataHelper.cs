@@ -59,6 +59,7 @@ namespace ATeam.Helpers
                 nipNumberBuilder.Append(_rand.Next(10).ToString());
                 checksum = NipChecksumCalculate(nipNumberBuilder.ToString());
             }
+
             nipNumberBuilder.Append(checksum);
             return nipNumberBuilder.ToString();
         }
