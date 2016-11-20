@@ -11,6 +11,7 @@ namespace ATeam.Tests
     using ATeam.Objects;
     using ATeam.Pages;
     using ATeam.Pages.RegisterProduct;
+    using OpenQA.Selenium;
 
     [TestClass]
     public class ExamRegistrationTests : BaseTest
@@ -190,5 +191,54 @@ namespace ATeam.Tests
             dashboard.ClickSessionLink(sessionData.City);
             Assert.AreEqual(8, dashboard.GetFreeSpaceCountFromSessionPopup());
         }
+
+        [TestMethod]
+        public void RegisterMultiUserToDifferentExmasWithLoggedInUser()
+        {
+            var startPage = new LandingPage(this.driver, true);
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            startPage.PgsLogo.Click();
+            var sessionId = startPage.GetExistingSessionIdWithFreePlacesAndManyExams(4, 3);
+            if (sessionId > -1)
+            {
+                var examButton = this.driver.FindElement(By.CssSelector(string.Format("div[data-session='{0}']", sessionId)));
+                examButton.FocusAtElement(this.driver);
+                examButton.Click();
+                var attendee = new Attendee();
+                var getAttendees = new GetAttendees(this.driver);
+                getAttendees.Email.WaitForElement(1000);
+                getAttendees.Populate(attendee);
+                Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+                getAttendees.AddUserToList.Click();
+
+                var attendee2 = new Attendee();
+                attendee2.SelectedProductId = 1;
+                getAttendees.Email.WaitForElement(1000);
+                getAttendees.Populate(attendee2);
+                Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+                getAttendees.AddUserToList.Click();
+                Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n2"));
+
+                var attendee3 = new Attendee();
+                attendee3.SelectedProductId = 2;
+                getAttendees.Email.WaitForElement(1000);
+                getAttendees.Populate(attendee3);
+                Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+                getAttendees.AddUserToList.Click();
+                Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n3"));
+
+                getAttendees.Forward.Click();
+                var getPersonData = new GetPersonData(this.driver);
+                var personData = new ContactData();
+                getPersonData.Populate(personData);
+                getPersonData.Forward.Click();
+                var getAddress = new GetAddress(this.driver);
+                getAddress.Populate(personData);
+                getAddress.Forward.Click();
+                Assert.IsTrue(this.driver.VisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
+                Assert.IsTrue(this.driver.VisibleText().Contains(personData.PersonDataEmail)); 
+            }
+         }
     }
 }
