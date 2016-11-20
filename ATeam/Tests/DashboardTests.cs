@@ -10,22 +10,6 @@ namespace ATeam.Tests
     public class DashboardTests : BaseTest
     {
         [TestMethod]
-        public void DashboardMethodsTestMethod()
-        {
-            this.LoginToDashboard(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
-            var dashboard = new Dashboard(this.driver);
-            this.driver.WaitForAjax();
-            dashboard.ClickSessionLinkNoCheck("Warszawa");
-            Assert.IsTrue(dashboard.SessionDetailsLink.WaitForElement(1000), "Session popup with details button has not been displayed!");
-            var registered = dashboard.GetRegisteredCountFromSessionPopup();
-            var freeSpace = dashboard.GetFreeSpaceCountFromSessionPopup();
-            var recordsCount = dashboard.GetRecordsCountOnPage();
-            dashboard.RecordsDropDownList.SelectByText("50");
-            Assert.AreEqual("tea", dashboard.GetCellFromRecord(1, 3).Text, "Improper value of a Last name in record nr 1!");
-            dashboard.GoToIndividualDetailsOfRecord(1);
-        }
-
-        [TestMethod]
         public virtual void DashboardPageCheckPgsLogo()
         {
             this.LoginToDashboard(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);

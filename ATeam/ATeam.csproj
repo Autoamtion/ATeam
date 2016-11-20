@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Helpers\DatesFormatHelper.cs" />
     <Compile Include="Helpers\ObjectHelper.cs" />
     <Compile Include="Helpers\Products.cs" />
     <Compile Include="Helpers\RandomDataHelper.cs" />

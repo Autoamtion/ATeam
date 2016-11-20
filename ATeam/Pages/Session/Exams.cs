@@ -1,4 +1,7 @@
-﻿namespace ATeam.Pages.Session
+﻿using System.Collections.Generic;
+using ATeam.Pages.Products;
+
+namespace ATeam.Pages.Session
 {
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
@@ -34,5 +37,17 @@
 
         [FindsBy(How = How.CssSelector, Using = "a[href*='/ateam/Dashboard/Index']")]
         public IWebElement DashboardBtn { get; set; }
+
+        public List<string> GetExamsIds()
+        {
+            var examsIds = new List<string>();
+            var exams = this.driver.FindElements(By.ClassName("Exam-examItemLink"));
+            foreach (var exam in exams)
+            {
+                examsIds.Add(exam.GetAttribute("data-productid"));
+            }
+
+            return examsIds;
+        }
     }
 }
