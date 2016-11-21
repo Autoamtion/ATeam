@@ -11,6 +11,8 @@ namespace ATeam.Tests
     using OpenQA.Selenium;
     using System.Threading;
 
+    using ATeam.Pages.RegisterProduct;
+
     [TestClass]
     public class AddSessionTests : BaseTest
     {
@@ -211,6 +213,93 @@ namespace ATeam.Tests
             session.DashboardLink.Click();
             var landingPage = new LandingPage(this.driver);
             landingPage.PgsLogo.Click();
+        }
+
+        [TestMethod]
+        public void DeleteCreatedSessionTest()
+        {
+            var startPage = new LandingPage(this.driver, true);
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            var session = new AddSession(this.driver);
+            session.SessionLink.Click();
+            var sessionData = new SessionData();
+            sessionData.IsSpacePerSession = false;
+            session.Populate(sessionData);
+            session.SaveSession.Click();
+            session.DashboardLink.Click();
+            var dashboard = new Dashboard(this.driver);
+            dashboard.SwitchMonthByDate(sessionData.SessionDate);
+            dashboard.ClickSessionLink(sessionData.City);
+            dashboard.DeleteSessionLink.Click();
+            Assert.IsTrue(this.driver.CheckAlertExists());
+            this.driver.AlertHandling(true);
+            Assert.IsFalse(
+                this.driver.VisibleText().Contains(sessionData.City));
+        }
+
+        [TestMethod]
+        public void DeleteCreatedSessionTestFromDetailsPage()
+        {
+            var startPage = new LandingPage(this.driver, true);
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            var session = new AddSession(this.driver);
+            session.SessionLink.Click();
+            var sessionData = new SessionData();
+            sessionData.IsSpacePerSession = false;
+            session.Populate(sessionData);
+            session.SaveSession.Click();
+            session.DashboardLink.Click();
+            var dashboard = new Dashboard(this.driver);
+            dashboard.SwitchMonthByDate(sessionData.SessionDate);
+            dashboard.ClickSessionLink(sessionData.City);
+            dashboard.SessionDetailsLink.Click();
+            var details = new Details(this.driver);
+            details.DeleteBtn.Click();
+            Assert.IsTrue(this.driver.CheckAlertExists());
+            this.driver.AlertHandling(true);
+            Assert.IsFalse(
+                this.driver.VisibleText().Contains(sessionData.City));
+        }
+
+        [TestMethod]
+        public void CheckSessionCannotDeleted()
+        {
+            var startPage = new LandingPage(this.driver, true);
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            startPage.PgsLogo.Click();
+            var sessionId = startPage.GetExistingSessionIdWithFreePlacesAndManyExams(4, 2);
+            var examButton = this.driver.FindElement(By.CssSelector(string.Format("div[data-session='{0}']", sessionId)));
+            examButton.FocusAtElement(this.driver);
+            examButton.Click();
+
+            var attendee = new Attendee();
+            var getAttendees = new GetAttendees(this.driver);
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            getAttendees.Forward.Click();
+            var getPersonData = new GetPersonData(this.driver);
+            var personData = new ContactData();
+            getPersonData.Populate(personData);
+            getPersonData.Forward.Click();
+            var getAddress = new GetAddress(this.driver);
+            getAddress.Populate(personData);
+            getAddress.Forward.Click();
+            getAddress.DashboardLink.Click();
+            var url = new Uri(this.driver.Url);
+            this.driver.Navigate().GoToUrl(url.Scheme + "://" + url.Host + "/ateam/Session/Details/" + sessionId);
+            var details = new Details(this.driver);
+            details.DeleteBtn.Click();
+            Assert.IsTrue(this.driver.CheckAlertExists());
+            this.driver.AlertHandling(true);
+            Assert.IsTrue(this.driver.CheckAlertExists());
+            var alert = this.driver.SwitchTo().Alert();
+            var alertText = alert.Text;
+            Assert.IsTrue(alertText.Contains("Operacja usunięcia nie może być zrealizowana"));
         }
     }
 }

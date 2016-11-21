@@ -291,8 +291,6 @@ namespace ATeam.Pages.Session
                     break;
             }
 
-            this.ExaminerId.Click();
-            this.ExaminerId.SendKeys(Keys.Escape);
-        }
+        public IWebElement Notes { get; set; }
     }
 }
