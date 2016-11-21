@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ATeam.Tests
 {
+    using System;
+
     using ATeam.Helpers;
     using ATeam.Pages;
     using ATeam.Pages.Session;
@@ -21,7 +23,11 @@ namespace ATeam.Tests
             var session = new AddSession(this.driver);
             session.SessionLink.Click();
             var sessionData = new SessionData();
-
+            session.SessionDtoDate.Click();
+            session.SessionDtoDate.SendKeys(DateTime.Now.AddDays(10).ToString("dd.MM.yyyy HH:mm"));
+            session.AdditionalInformation.Click();
+            session.SessionDtoDate.Click();
+            session.SessionDtoDate.Clear();
             session.ProductSelect.Click();
             Thread.Sleep(500);
             Assert.IsFalse(session.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish.Exists(), "Product is visible but date of session and difficulty level were not set!");

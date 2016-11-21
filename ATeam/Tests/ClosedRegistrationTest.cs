@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ATeam.Pages;
 using ATeam.Objects;
 using ATeam.Pages.Session;
+using ATeam.Helpers;
 
 namespace ATeam.Tests
 {
@@ -17,8 +18,9 @@ namespace ATeam.Tests
 
             var sessionData = new SessionData();
             sessionData.SetSpecificLocation = true;
-
+            
             var proposePage = new ClosedRegistrationDateAndPlace(this.driver);
+            proposePage.ProposedDate.WaitForElement(500);
             proposePage.Populate(sessionData);
         }
 
