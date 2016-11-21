@@ -36,6 +36,9 @@ namespace ATeam.Pages
         [FindsBy(How = How.CssSelector, Using = "div[data-session]")]
         public IList<IWebElement> GroupRegistration { get; set; }
 
+        [FindsBy(How = How.LinkText, Using = "Zarejestruj się")]
+        public IList<IWebElement> RegisterClosedSession { get; set; }
+
         public int GetExistingSessionIdWithFreePlacesAndManyExams(int minPlaces, int minExams)
         {
             var freePlacesRegExp = @"Wolnych miejsc[\r\n]{1,2}([0-9]{1,3})[\r\n]{1,2}";
