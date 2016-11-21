@@ -258,7 +258,8 @@ namespace ATeam.Pages.Session
 
                 if (d.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish)
                 {
-                    this.IstqbAdvancedLevelTechnicalTestAnalystPlaces.SendKeys(d.IstqbAdvancedLevelTechnicalTestAnalystPlaces.ToString());
+                    this.IstqbAdvancedLevelTechnicalTestAnalystPlaces.SendKeys(
+                        d.IstqbAdvancedLevelTechnicalTestAnalystPlaces.ToString());
                 }
 
                 if (d.IstqbAgileTesterExtensionEnglishPolish)
@@ -290,6 +291,7 @@ namespace ATeam.Pages.Session
                     this.ExaminerNone.Click();
                     break;
             }
+        }
 
         public IWebElement Notes { get; set; }
     }
