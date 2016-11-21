@@ -34,5 +34,8 @@ namespace ATeam.Pages.Session
 
         [FindsBy(How = How.Id, Using = "ClosedRegistrationDateAndPlaceDto_AdditionalInformation")]
         public IWebElement AdditionalInformation { get; set; }
+
+        [FindsBy(How = How.ClassName, Using = "Register-forwardBtn")]
+        public IWebElement ForwardButton { get; set; }
     }
 }
