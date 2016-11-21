@@ -59,7 +59,13 @@ namespace ATeam.Tests
             dashboard.SwitchMonthByDate(sessionData.SessionDate);
             WebDriverExtensions.WaitForAjax(this.driver);
             dashboard.ClickSessionLinkNoCheck(sessionData.City);
-            
+            dashboard.EditSessionLink.Click();
+            var editSession = new EditSession(this.driver);
+            string s = editSession.SpaceForSession.Text;
+            editSession.SpacePerProduct.Click();
+            Assert.Equals(s, editSession.SpacePerProduct.Text);
+
+
         }
     }
 }

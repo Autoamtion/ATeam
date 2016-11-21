@@ -61,6 +61,9 @@ namespace ATeam.Pages.Session
         [FindsBy(How = How.LinkText, Using = "Inny")]
         public IWebElement LevelOther { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "[class*='form-control js-session-closed valid']")]
+        public IWebElement ProductSpace { get; set; }
+
         [FindsBy(How = How.XPath, Using = "//select[contains(@class,'product')]/..")]
         public IWebElement ProductSelect { get; set; }
 
