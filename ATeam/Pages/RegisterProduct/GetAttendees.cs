@@ -31,19 +31,19 @@ namespace ATeam.Pages.RegisterProduct
         [FindsBy(How = How.Name, Using = "phone")]
         public IWebElement Phone { get; set; }
 
-        [FindsBy(How = How.Name, Using = "product")]
+        [FindsBy(How = How.CssSelector, Using = "label[for*='ProductPerProductSession']")]
         public IList<IWebElement> Product { get; set; }
 
-        [FindsBy(How = How.Id, Using = "RegistrationLanguageID7add")]
+        [FindsBy(How = How.Id, Using = "RegistrationLanguageID37add")]
         public IWebElement ProductLanguageEnglish { get; set; }
 
-        [FindsBy(How = How.Id, Using = "RegistrationLanguageID8add")]
+        [FindsBy(How = How.Id, Using = "RegistrationLanguageID38add")]
         public IWebElement ProductLanguagePolish { get; set; }
 
-        [FindsBy(How = How.Id, Using = "ProductFormIdpapierowa")]
+        [FindsBy(How = How.Id, Using = "ProductFormIdpapierowaadd")]
         public IWebElement ProductFormPaper { get; set; }
 
-        [FindsBy(How = How.Id, Using = "ProductFormIdelektroniczna")]
+        [FindsBy(How = How.Id, Using = "ProductFormIdelektronicznaadd")]
         public IWebElement ProductFormElectronic { get; set; }
 
         [FindsBy(How = How.Name, Using = "certificateNumber")]
