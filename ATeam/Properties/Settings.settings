@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="StartUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://examplanner.pgs-soft.com/ateam</Value>
+      <Value Profile="(Default)">https://examplanner-v2.pgs-soft.com/ateam</Value>
     </Setting>
     <Setting Name="UserAteam1" Type="System.String" Scope="User">
       <Value Profile="(Default)">ateam1@pgs-soft.com</Value>

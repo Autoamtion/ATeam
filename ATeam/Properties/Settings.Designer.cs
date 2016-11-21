@@ -25,7 +25,7 @@ namespace ATeam.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://examplanner.pgs-soft.com/ateam")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://examplanner-v2.pgs-soft.com/ateam")]
         public string StartUrl {
             get {
                 return ((string)(this["StartUrl"]));
