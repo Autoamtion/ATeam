@@ -269,6 +269,7 @@ namespace ATeam.Tests
             var attendee = new Attendee();
             var getAttendees = new GetAttendees(this.driver);
             getAttendees.Email.WaitForElement(1000);
+            attendee.IsEnglish = true;
             getAttendees.Populate(attendee);
             Assert.IsTrue(getAttendees.AddUserToList.Displayed);
             getAttendees.AddUserToList.Click();
@@ -329,6 +330,7 @@ namespace ATeam.Tests
             var details = new Details(driver);
             details.ActivateSession();
             session.DashboardLink.Click();
+            
             var landingPage = new LandingPage(this.driver);
             landingPage.PgsLogo.Click();
             Thread.Sleep(2000);
@@ -345,7 +347,7 @@ namespace ATeam.Tests
             getAttendees.AddUserToList.Click();
 
             var attendee2 = new Attendee();
-            attendee2.SelectedProductId = 1;
+            attendee2.SelectedProductId = 0;
             getAttendees.Email.WaitForElement(1000);
             getAttendees.Populate(attendee2);
             int freePlaces2 = getAttendees.GetFreePlaces();
@@ -355,7 +357,7 @@ namespace ATeam.Tests
             Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n2"));
 
             var attendee3 = new Attendee();
-            attendee3.SelectedProductId = 1;
+            attendee3.SelectedProductId = 0;
             getAttendees.Email.WaitForElement(1000);
             getAttendees.Populate(attendee3);
             int freePlaces3 = getAttendees.GetFreePlaces();
@@ -365,7 +367,7 @@ namespace ATeam.Tests
             Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n3"));
 
             var attendee4 = new Attendee();
-            attendee4.SelectedProductId = 1;
+            attendee4.SelectedProductId = 0;
             getAttendees.Email.WaitForElement(1000);
             int freePlaces4 = getAttendees.GetFreePlaces();
             Assert.AreEqual(freePlaces3 - 1, freePlaces4);
@@ -375,7 +377,7 @@ namespace ATeam.Tests
             Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n4"));
 
             var attendee5 = new Attendee();
-            attendee5.SelectedProductId = 1;
+            attendee5.SelectedProductId = 0;
             int freePlaces5 = getAttendees.GetFreePlaces();
             Assert.AreEqual(freePlaces4 - 1, freePlaces5);
             getAttendees.Email.WaitForElement(1000);
@@ -385,13 +387,12 @@ namespace ATeam.Tests
             Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n5"));
 
             var attendee6 = new Attendee();
-            attendee6.SelectedProductId = 1;
+            attendee6.SelectedProductId = 0;
             int freePlaces6 = getAttendees.GetFreePlaces();
             getAttendees.Email.WaitForElement(1000);
             getAttendees.Product[0].Click();
             string text = this.driver.SwitchTo().Alert().Text;
-            getAttendees.AddUserToList.Click();
-
+            Assert.IsTrue(text.Equals("Brak miejsc"));
         }
 
     }
