@@ -24,6 +24,9 @@
         [FindsBy(How = How.CssSelector, Using = "button[class*='delete']")]
         public IWebElement DeleteBtn { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "a[href*='/ateam/Session/EditSession']")]
+        public IWebElement EditBtn { get; set; }
+
         [FindsBy(How = How.Id, Using = "sidebarItem-SessionExams")]
         public IWebElement ExamsBtn { get; set; }
 
