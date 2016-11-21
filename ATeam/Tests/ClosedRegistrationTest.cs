@@ -136,6 +136,41 @@ namespace ATeam.Tests
             var address = new GetAddress(this.driver);
             address.Populate(contactData);
             address.Forward.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
+        }
+        [TestMethod]
+
+        public void ClosedRegistrationWithoutKnownLocalizationWithLogin()
+        {
+            var startPage = new LandingPage(this.driver);
+            startPage.LoginLink.Click();
+            var login = new Login(this.driver);
+            login.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            login.PgsLogo.Click();
+
+            startPage.RegisterClosedSession.Click();
+
+            var sessionData = new SessionData();
+            sessionData.SetSpecificLocation = false;
+
+            var proposePage = new ClosedRegistrationDateAndPlace(this.driver);
+            proposePage.Populate(sessionData);
+            proposePage.ForwardButton.Click();
+
+            var attendee = new Attendee();
+            var users = new ClosedSessionParticipants(this.driver);
+            users.Populate(attendee);
+            users.AddParticipant.Click();
+            users.GoToContactData.Click();
+
+            var contactData = new ContactData();
+            var personData = new GetPersonData(this.driver);
+            personData.Populate(contactData);
+            personData.Forward.Click();
+            var address = new GetAddress(this.driver);
+            address.Populate(contactData);
+            address.Forward.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
         }
     }
 }
