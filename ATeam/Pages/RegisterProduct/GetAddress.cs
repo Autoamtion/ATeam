@@ -95,6 +95,7 @@ namespace ATeam.Pages.RegisterProduct
             this.Name.WaitForElement(1000);
             this.Name.SendKeys(d.ContactName);
             this.Surname.SendKeys(d.ContactSurname);
+            this.PostalCode.Click();
             this.PostalCode.SendKeys(d.ContactPostCode);
             this.City.SendKeys(d.ContactCity);
             this.Address.SendKeys(d.ContactAddress);
@@ -110,6 +111,7 @@ namespace ATeam.Pages.RegisterProduct
                     break;
                     case InvoiceType.Digital:
                     this.InvoiceTypesElectronic.Click();
+                    this.InvoicePostalCode.Click();
                     this.InvoicePostalCode.Clear();
                     this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
                     this.InvoicePostalCode.SendKeys(d.InvoicePostalCode);
@@ -123,6 +125,7 @@ namespace ATeam.Pages.RegisterProduct
                     case InvoiceType.Paper:
                     this.InvoiceTypesPaper.Click();
                     this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
+                    this.InvoicePostalCode.Click();
                     this.InvoicePostalCode.Clear();
                     this.InvoicePostalCode.SendKeys(d.InvoicePostalCode);
                     this.InvoiceCity.Click();
@@ -139,6 +142,7 @@ namespace ATeam.Pages.RegisterProduct
                     {
                         this.LetterCompanyName.WaitForElement(500);
                         this.LetterCompanyName.SendKeys(d.LetterCompanyName);
+                        this.LetterPostalCode.Click();
                         this.LetterPostalCode.SendKeys(d.LetterPostalCode);
                         this.LetterCity.SendKeys(d.LetterCity);
                         this.LetterAddress.SendKeys(d.LetterAddress);

@@ -19,7 +19,7 @@ namespace ATeam.Pages.RegisterProduct
         {
         }
 
-        [FindsBy(How = How.Id, Using = "ProductSelectionDto_ProductLanguage7")]
+        [FindsBy(How = How.Id, Using = "ProductSelectionDto_ProductLanguage38")]
         public IWebElement ProductLanguageEnglish { get; set; }
 
         [FindsBy(How = How.Id, Using = "ProductSelectionDto_ProductLanguage8")]
