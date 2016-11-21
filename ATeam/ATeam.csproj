@@ -106,7 +106,7 @@
     <Compile Include="Tests\RegistrationListTest.cs" />
     <Compile Include="Tests\IndividualDetailsTest.cs" />
     <Compile Include="Tests\ExamRegistrationTests.cs" />
-    <Compile Include="Tests\UnitTest1.cs" />
+    <Compile Include="Tests\ClosedRegistrationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

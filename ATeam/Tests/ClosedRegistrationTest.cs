@@ -9,6 +9,7 @@ namespace ATeam.Tests
         [TestMethod]
         public void ClosedRegistrationWithSpecificLocation()
         {
+
         }
     }
 }
