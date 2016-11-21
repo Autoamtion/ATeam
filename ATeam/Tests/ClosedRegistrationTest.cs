@@ -7,6 +7,8 @@ using ATeam.Helpers;
 
 namespace ATeam.Tests
 {
+    using ATeam.Pages.RegisterProduct;
+
     [TestClass]
     public class ClosedRegistrationTest : BaseTest
     {
@@ -43,6 +45,20 @@ namespace ATeam.Tests
             var proposePage = new ClosedRegistrationDateAndPlace(this.driver);
             proposePage.Populate(sessionData);
             proposePage.ForwardButton.Click();
+
+            var attendee = new Attendee();
+            var users = new ClosedSessionParticipants(this.driver);
+            users.Populate(attendee);
+            users.AddParticipant.Click();
+            users.GoToContactData.Click();
+
+            var contactData = new ContactData();
+            var personData = new GetPersonData(this.driver);
+            personData.Populate(contactData);
+            personData.Forward.Click();
+            var address = new GetAddress(this.driver);
+            address.Populate(contactData);
+            address.Forward.Click();
         }
     }
 }

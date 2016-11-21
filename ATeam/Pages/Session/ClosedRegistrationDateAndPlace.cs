@@ -42,6 +42,7 @@ namespace ATeam.Pages.Session
 
         public void Populate(SessionData d)
         {
+            WebDriverExtensions.WaitForAjax(driver);
             this.ProposedDate.SendKeys(d.SessionDate.ToString("dd.MM.yyyy HH:mm"));
             if (d.SetSpecificLocation)
             {
