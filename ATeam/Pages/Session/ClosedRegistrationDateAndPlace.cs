@@ -46,6 +46,8 @@ namespace ATeam.Pages.Session
             if (d.SetSpecificLocation)
             {
                 this.SetSpecificLocation.Click();
+                this.PostCode.Click();
+                this.PostCode.Clear();
                 this.PostCode.SendKeys(d.PostCode);
                 this.City.SendKeys(d.City);
                 this.Address.SendKeys(d.Address);
