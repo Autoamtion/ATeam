@@ -50,13 +50,13 @@ namespace ATeam.Pages.Session
         [FindsBy(How = How.Name, Using = "product")]
         public IList<IWebElement> Product { get; set; }
 
-        [FindsBy(How = How.Id, Using = "certificateNumber")]
+        [FindsBy(How = How.Name, Using = "certificateNumber")]
         public IWebElement CertificateNumber { get; set; }
 
-        [FindsBy(How = How.Id, Using = "certificatePicker")]
+        [FindsBy(How = How.Name, Using = "certificatePicker")]
         public IWebElement CertificateDate { get; set; }
 
-        [FindsBy(How = How.Id, Using = "certificateProvider")]
+        [FindsBy(How = How.Name, Using = "certificateProvider")]
         public IWebElement CertificateProvider { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "button[type='submit']")]
@@ -97,8 +97,8 @@ namespace ATeam.Pages.Session
             }
 
             Thread.Sleep(1000);
-            this.Product[0].WaitForElement(1000);
             this.Product[a.SelectedProductId].Click();
+            this.CertificateNumber.WaitForElement(1000);
             if (this.CertificateNumber.Exists())
             {
                 this.CertificateNumber.SendKeys(a.CertificateNumber);
