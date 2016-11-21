@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATeam.Pages
 {
+    using Helpers;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
 
@@ -41,6 +42,7 @@ namespace ATeam.Pages
         public void LogIntoServie(string user, string pwd)
         {
             var landingPage = new LandingPage(this.driver, true);
+            this.Email.WaitForElement(500);
             this.Email.SendKeys(user);
             this.PasswordPass.SendKeys(pwd);
             this.LogIn.Click();

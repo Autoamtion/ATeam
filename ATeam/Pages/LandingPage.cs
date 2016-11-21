@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Text.RegularExpressions;
+using ATeam.Helpers;
 
 namespace ATeam.Pages
 {
@@ -21,6 +22,7 @@ namespace ATeam.Pages
         {
             if (goToLoginPage)
             {
+                this.LoginLink.WaitForElement(500);
                 this.LoginLink.Click();
             }
         }
