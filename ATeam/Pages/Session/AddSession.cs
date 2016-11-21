@@ -65,28 +65,28 @@ namespace ATeam.Pages.Session
         [FindsBy(How = How.XPath, Using = "//select[contains(@class,'product')]/..")]
         public IWebElement ProductSelect { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "ISTQB Foundation Level / Angielski, Polski")]
+        [FindsBy(How = How.LinkText, Using = "ISTQB Foundation Level / Polski, Angielski")]
         public IWebElement IstqbFoundationLevelEnglishPolish { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "REQB Foundation Level / Angielski, Polski")]
+        [FindsBy(How = How.LinkText, Using = "REQB Foundation Level / Polski, Angielski")]
         public IWebElement ReqbFoundationLevelEnglishPolish { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "ISTQB Advanced Level Test Manager / Angielski, Polski")]
+        [FindsBy(How = How.LinkText, Using = "ISTQB Advanced Level Test Manager / Polski, Angielski")]
         public IWebElement IstqbAdvancedLevelTestManagerEnglishPolish { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "ISTQB Advancel Level Test Analyst / Angielski, Polski")]
+        [FindsBy(How = How.XPath, Using = "//span[normalize-space(text())=\"ISTQB Advanced Level Test Analyst / Polski, Angielski\"]")]
         public IWebElement IstqbAdvancedLevelTestAnalystEnglishPolish { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "ISTQB Advanced Level Technical Test Analyst / Angielski, Polski")]
+        [FindsBy(How = How.LinkText, Using = "ISTQB Advanced Level Technical Test Analyst / Polski, Angielski")]
         public IWebElement IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "ISTQB Agile Tester Extension / Angielski, Polski")]
+        [FindsBy(How = How.LinkText, Using = "ISTQB Agile Tester Extension / Polski, Angielski")]
         public IWebElement IstqbAgileTesterExtensionEnglishPolish { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "ISTQB Test Management / Angielski")]
         public IWebElement IstqbTestManagementEnglish { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "ISTQB Improving the Test Process / Angielski")]
+        [FindsBy(How = How.LinkText, Using = "ISTQB Improving the Testing Process / Angielski")]
         public IWebElement IstqbImprovingTheTestProcessEnglish { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "button[data-id='SessionDto_ExaminerId']")]
@@ -95,10 +95,10 @@ namespace ATeam.Pages.Session
         [FindsBy(How = How.LinkText, Using = "(brak)")]
         public IWebElement ExaminerNone { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Ateam1 Test")]
+        [FindsBy(How = How.LinkText, Using = "Ateam 1 Test")]
         public IWebElement ExaminerAteam1 { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Ateam2 Test")]
+        [FindsBy(How = How.LinkText, Using = "Ateam 2 Test")]
         public IWebElement ExaminerAteam2 { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "Anuluj")]
@@ -107,28 +107,28 @@ namespace ATeam.Pages.Session
         [FindsBy(How = How.CssSelector, Using = "button[type='submit']")]
         public IWebElement SaveSession { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[4].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[88].CapacityForProductSession")]
         public IWebElement IstqbAdvancedLevelTestManagerPlaces { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[18].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[87].CapacityForProductSession")]
         public IWebElement IstqbAdvancedLevelTestAnalystPlaces { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[19].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[86].CapacityForProductSession")]
         public IWebElement IstqbAdvancedLevelTechnicalTestAnalystPlaces { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[3].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[90].CapacityForProductSession")]
         public IWebElement IstqbFoundationLevelPlaces { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[22].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[93].CapacityForProductSession")]
         public IWebElement ReqbFoundationLevelPlaces { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[20].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[91].CapacityForProductSession")]
         public IWebElement IstqbTestManagementPlaces { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[21].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[92].CapacityForProductSession")]
         public IWebElement IstqbImprovingTheTestProcessPlaces { get; set; }
 
-        [FindsBy(How = How.Name, Using = "SessionDto.Products[23].CapacityForProductSession")]
+        [FindsBy(How = How.Name, Using = "SessionDto.Products[89].CapacityForProductSession")]
         public IWebElement IstqbAgileTesterExtensionPlaces { get; set; }
 
         [FindsBy(How = How.Name, Using = "SessionDto.SpaceForSession")]
@@ -137,6 +137,7 @@ namespace ATeam.Pages.Session
         public void Populate(SessionData d)
         {
             this.SessionDtoDate.SendKeys(d.SessionDate.ToString("dd.MM.yyyy HH:mm"));
+            this.LocationPostCode.Click();
             this.LocationPostCode.SendKeys(d.PostCode);
             this.LocationCity.SendKeys(d.City);
             this.LocationAddress.SendKeys(d.Address);
@@ -179,9 +180,10 @@ namespace ATeam.Pages.Session
             this.LevelSelect.Click();
             this.LevelSelect.SendKeys(Keys.Escape);
             this.ProductSelect.Click();
-            this.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish.WaitForElement(500);
+            this.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish.WaitForElement(1000);
             if (d.IstqbFoundationLevelEnglishPolish)
             {
+                this.IstqbFoundationLevelEnglishPolish.WaitForElement(500);
                 this.IstqbFoundationLevelEnglishPolish.Click();
             }
 
