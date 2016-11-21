@@ -36,7 +36,7 @@ namespace ATeam.Pages
         [FindsBy(How = How.CssSelector, Using = "div[data-session]")]
         public IList<IWebElement> GroupRegistration { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Zarejestruj się")]
+        [FindsBy(How = How.ClassName, Using = "btn js-closed LandingPage-registerBtn")]
         public IWebElement RegisterClosedSession { get; set; }
 
         public int GetExistingSessionIdWithFreePlacesAndManyExams(int minPlaces, int minExams)
