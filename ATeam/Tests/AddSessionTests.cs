@@ -110,14 +110,14 @@ namespace ATeam.Tests
             sessionData.IsSpacePerSession = true;
             session.Populate(sessionData);
             var text = this.driver.VisibleText();
-            Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
-            Assert.IsTrue(text.Contains("REQB Foundation Level / Angielski, Polski"));
-            Assert.IsTrue(text.Contains("ISTQB Advanced Level Test Manager / Angielski, Polski"));
-            Assert.IsTrue(text.Contains("ISTQB Advancel Level Test Analyst / Angielski, Polski"));
-            Assert.IsTrue(text.Contains("ISTQB Advanced Level Technical Test Analyst / Angielski, Polski"));
-            Assert.IsTrue(text.Contains("ISTQB Test Management / Angielski"));
-            Assert.IsTrue(text.Contains("ISTQB Improving the Test Process / Angielski"));
-            Assert.IsTrue(text.Contains("ISTQB Agile Tester Extension / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Foundation Level"));
+            Assert.IsTrue(text.Contains("REQB Foundation Level"));
+            Assert.IsTrue(text.Contains("ISTQB Advanced Level Test Manager"));
+            Assert.IsTrue(text.Contains("ISTQB Advanced Level Test Analyst"));
+            Assert.IsTrue(text.Contains("ISTQB Advanced Level Technical Test Analyst"));
+            Assert.IsTrue(text.Contains("ISTQB Test Management"));
+            Assert.IsTrue(text.Contains("ISTQB Improving the Testing Process"));
+            Assert.IsTrue(text.Contains("ISTQB Agile Tester Extension"));
             session.SaveSession.Click();
             text = this.driver.VisibleText();
             Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("dd.MM.yyyy")));
@@ -126,7 +126,7 @@ namespace ATeam.Tests
             Assert.IsTrue(text.Contains(sessionData.PostCode));
             Assert.IsTrue(text.Contains(sessionData.Address));
             Assert.IsTrue(text.Contains(sessionData.City));
-            Assert.IsTrue(text.Contains("Ateam1 Test"));
+            Assert.IsTrue(text.Contains("Ateam 1 Test"));
             var sessionId = this.driver.Url.Substring(this.driver.Url.LastIndexOf("/") + 1);
         }
 
