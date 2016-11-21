@@ -109,6 +109,7 @@
     <Compile Include="Tests\IndividualDetailsTest.cs" />
     <Compile Include="Tests\ExamRegistrationTests.cs" />
     <Compile Include="Tests\ClosedRegistrationTest.cs" />
+    <Compile Include="Tests\EditSessionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
