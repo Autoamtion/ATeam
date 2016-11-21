@@ -300,5 +300,104 @@ namespace ATeam.Tests
             Assert.IsTrue(this.driver.VisibleText().Contains("Dziękujemy za zapisanie się na egzamin"));
             Assert.IsTrue(this.driver.VisibleText().Contains(personData.PersonDataEmail));
         }
+
+        [TestMethod]
+        public void RegisterUserToExamWithoutFreePlace()
+        {
+
+            var loginPage = new Login(this.driver);
+            loginPage.LogIntoServie(Properties.Settings.Default.UserAteam1, Properties.Settings.Default.PasswordAteam1);
+            var dashboard = new Dashboard(this.driver);
+            dashboard.AddSessionButton.Click();
+            var session = new AddSession(this.driver);
+            session.SessionLink.Click();
+            var sessionData = new SessionData();
+            sessionData.PlaceForSession = 5;
+            sessionData.IsSpacePerSession = true;
+            sessionData.LevelAdvanced = false;
+            sessionData.LevelExpert = false;
+            sessionData.LevelOther = false;
+            sessionData.IstqbAdvancedLevelTechnicalTestAnalystEnglishPolish = false;
+            sessionData.IstqbAdvancedLevelTestAnalystEnglishPolish = false;
+            sessionData.IstqbAdvancedLevelTestManagerEnglishPolish = false;
+            sessionData.IstqbAgileTesterExtensionEnglishPolish = false;
+            sessionData.IstqbImprovingTheTestProcessEnglish = false;
+            sessionData.ReqbFoundationLevelEnglishPolish = false;
+            sessionData.IstqbTestManagementEnglish = false;
+            session.Populate(sessionData);
+            session.SaveSession.Click();
+            session.DashboardLink.Click();
+            var landingPage = new LandingPage(this.driver);
+            landingPage.PgsLogo.Click();
+            Thread.Sleep(2000);
+            var sessionId = landingPage.GetExistingSessionIdWithFreePlacesAndManyExams(5, 1);
+            var examButton = this.driver.FindElement(By.CssSelector(string.Format("div[data-session='{0}']", sessionId)));
+            examButton.Click();
+
+            var attendee = new Attendee();
+            var getAttendees = new GetAttendees(this.driver);
+            int freePlaces = getAttendees.GetFreePlaces();
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+
+            var attendee2 = new Attendee();
+            attendee2.SelectedProductId = 1;
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee2);
+            int freePlaces2 = getAttendees.GetFreePlaces();
+            Assert.AreEqual(freePlaces-1, freePlaces2);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n2"));
+
+            var attendee3 = new Attendee();
+            attendee3.SelectedProductId = 1;
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee3);
+            int freePlaces3 = getAttendees.GetFreePlaces();
+            Assert.AreEqual(freePlaces2-1,freePlaces3);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n3"));
+
+            var attendee4 = new Attendee();
+            attendee4.SelectedProductId = 1;
+            getAttendees.Email.WaitForElement(1000);
+            int freePlaces4 = getAttendees.GetFreePlaces();
+            getAttendees.Populate(attendee4);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n4"));
+
+            var attendee5 = new Attendee();
+            attendee5.SelectedProductId = 1;
+            int freePlaces5 = getAttendees.GetFreePlaces();
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee5);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+            Assert.IsTrue(this.driver.VisibleText().Contains("Uczestnicy\r\n5"));
+
+            var attendee6 = new Attendee();
+            attendee6.SelectedProductId = 1;
+            int freePlaces6 = getAttendees.GetFreePlaces();
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Populate(attendee6);
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+
+            var attendee7 = new Attendee();
+            attendee7.SelectedProductId = 1;
+            int freePlaces7 = getAttendees.GetFreePlaces();
+            getAttendees.Email.WaitForElement(1000);
+            getAttendees.Product[0].Click();
+            string text = this.driver.SwitchTo().Alert().Text;
+            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
+            getAttendees.AddUserToList.Click();
+
+        }
+
     }
 }

@@ -91,7 +91,7 @@ namespace ATeam.Pages.Products
         {
             foreach (var product in ProductList)
             {
-                if (!product.FindElements(By.TagName("td"))[column].Text.Equals(text))
+                if (!product.FindElements(By.TagName("td"))[column].Text.Contains(text))
                 {
                     continue;
                 }

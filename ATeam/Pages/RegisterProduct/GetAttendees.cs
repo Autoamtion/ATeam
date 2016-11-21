@@ -8,6 +8,8 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace ATeam.Pages.RegisterProduct
 {
+    using System.Text.RegularExpressions;
+
     using ATeam.Helpers;
     using ATeam.Objects;
 
@@ -59,6 +61,9 @@ namespace ATeam.Pages.RegisterProduct
         [FindsBy(How = How.CssSelector, Using = "div[class='Register-forwardBtn'] > button")]
         public IWebElement Forward { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "[class*='registration__product--label-session']")]
+        public IWebElement NumberOfFreePlaces { get; set; }
+
         public void Populate(Attendee att)
         {
             this.Name.SendKeys(att.Name);
@@ -97,6 +102,12 @@ namespace ATeam.Pages.RegisterProduct
                 this.CertificateDate.SendKeys(att.CertificateIssueDate);
                 this.CertificateProvider.SendKeys(att.CertificateIssuer);
             }
+        }
+        public int GetFreePlaces()
+        {
+            string value = this.NumberOfFreePlaces.Text;
+            string result = Regex.Match(value, @"\d+").ToString();
+            return int.Parse(result);
         }
     }
 }
