@@ -37,7 +37,7 @@ namespace ATeam.Pages
         public IList<IWebElement> GroupRegistration { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "Zarejestruj się")]
-        public IList<IWebElement> RegisterClosedSession { get; set; }
+        public IWebElement RegisterClosedSession { get; set; }
 
         public int GetExistingSessionIdWithFreePlacesAndManyExams(int minPlaces, int minExams)
         {
