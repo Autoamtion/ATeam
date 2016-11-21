@@ -39,6 +39,9 @@ namespace ATeam.Pages
         [FindsBy(How = How.CssSelector, Using = "a[href*='/ateam/Session/Details']")]
         public IWebElement SessionDetailsLink { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "a[href*='/ateam/Session/EditSession/']")]
+        public IWebElement EditSessionLink { get; set; }
+
         [FindsBy(How = How.ClassName, Using = "js-session-delete")]
         public IWebElement DeleteSessionLink { get; set; }
 
