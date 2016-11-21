@@ -120,6 +120,7 @@ namespace ATeam.Pages
         public bool ClickSessionLink(string cityName)
         {
             var sessionLink = this.driver.FindElement(By.XPath(string.Format("//span[contains(@class, 'fc-title') and text() = '{0}']", cityName)));
+            sessionLink.WaitForElement(2000);
             if (!sessionLink.Exists())
             {
                 return false;
