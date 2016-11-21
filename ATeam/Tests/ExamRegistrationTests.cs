@@ -326,6 +326,8 @@ namespace ATeam.Tests
             sessionData.IstqbTestManagementEnglish = false;
             session.Populate(sessionData);
             session.SaveSession.Click();
+            var details = new Details(driver);
+            details.ActivateSession();
             session.DashboardLink.Click();
             var landingPage = new LandingPage(this.driver);
             landingPage.PgsLogo.Click();

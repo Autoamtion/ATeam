@@ -35,6 +35,7 @@ namespace ATeam.Tests
 
             var proposePage = new ClosedRegistrationDateAndPlace(this.driver);
             proposePage.Populate(sessionData);
+            proposePage.ForwardButton.Click();
         }
     }
 }
