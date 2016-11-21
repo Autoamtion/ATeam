@@ -18,13 +18,19 @@ namespace ATeam.Objects
             ObjectHelper.SetDefaultValues(this);
             var rand = new Random();
             this.SessionDate = DateTime.Now.AddDays(rand.Next(1,30)).AddHours(rand.Next(1, 12));
+            this.ProposedSessionDate = this.SessionDate;
             this.Address = RandomDataHelper.GetRandomString(5);
             this.City = RandomDataHelper.GetRandomString(8);
             this.PostCode = string.Format("0{0}-{1}", RandomDataHelper.GetRandomNumber(1), RandomDataHelper.GetRandomNumber(3));
             this.Comment = string.Format("A-Team {0}", DateTime.Now);
         }
 
+        public DateTime ProposedSessionDate { get; set; }
+
         public DateTime SessionDate { get; set; }
+
+        [DefaultValue(true)]
+        public bool SetSpecificLocation { get; set; }
 
         public string PostCode { get; set; }
 
