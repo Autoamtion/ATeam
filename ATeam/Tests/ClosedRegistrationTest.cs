@@ -21,5 +21,18 @@ namespace ATeam.Tests
             var proposePage = new ClosedRegistrationDateAndPlace(this.driver);
             proposePage.Populate(sessionData);
         }
+
+        [TestMethod]
+        public void ClosedRegistrationWithoutKnownLocalization()
+        {
+            var startPage = new LandingPage(this.driver);
+            startPage.RegisterClosedSession.Click();
+
+            var sessionData = new SessionData();
+            sessionData.SetSpecificLocation = false;
+
+            var proposePage = new ClosedRegistrationDateAndPlace(this.driver);
+            proposePage.Populate(sessionData);
+        }
     }
 }

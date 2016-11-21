@@ -52,6 +52,7 @@ namespace ATeam.Pages.Session
             }
             else
             {
+                this.ProposedDate.SendKeys(d.SessionDate.ToString("dd.MM.yyyy HH:mm"));
                 this.NoSpecificLocation.Click();
             }
 
