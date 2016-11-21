@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using ATeam.Helpers;
+using ATeam.Objects;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -37,5 +39,23 @@ namespace ATeam.Pages.Session
 
         [FindsBy(How = How.ClassName, Using = "Register-forwardBtn")]
         public IWebElement ForwardButton { get; set; }
+
+        public void Populate(SessionData d)
+        {
+            this.ProposedDate.SendKeys(d.SessionDate.ToString("dd.MM.yyyy HH:mm"));
+            if (d.SetSpecificLocation)
+            {
+                this.SetSpecificLocation.Click();
+                this.PostCode.SendKeys(d.PostCode);
+                this.City.SendKeys(d.City);
+                this.Address.SendKeys(d.Address);
+            }
+            else
+            {
+                this.NoSpecificLocation.Click();
+            }
+
+            this.AdditionalInformation.SendKeys(string.Format("Additional information: {0}", RandomDataHelper.GetRandomString(10)));
+        }
     }
 }
