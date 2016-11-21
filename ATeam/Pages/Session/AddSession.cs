@@ -136,6 +136,7 @@ namespace ATeam.Pages.Session
 
         public void Populate(SessionData d)
         {
+            WebDriverExtensions.WaitForAjax(driver);
             this.SessionDtoDate.SendKeys(d.SessionDate.ToString("dd.MM.yyyy HH:mm"));
             this.LocationPostCode.Click();
             this.LocationPostCode.SendKeys(d.PostCode);
