@@ -366,6 +366,7 @@ namespace ATeam.Tests
             attendee4.SelectedProductId = 1;
             getAttendees.Email.WaitForElement(1000);
             int freePlaces4 = getAttendees.GetFreePlaces();
+            Assert.AreEqual(freePlaces3 - 1, freePlaces4);
             getAttendees.Populate(attendee4);
             Assert.IsTrue(getAttendees.AddUserToList.Displayed);
             getAttendees.AddUserToList.Click();
@@ -374,6 +375,7 @@ namespace ATeam.Tests
             var attendee5 = new Attendee();
             attendee5.SelectedProductId = 1;
             int freePlaces5 = getAttendees.GetFreePlaces();
+            Assert.AreEqual(freePlaces4 - 1, freePlaces5);
             getAttendees.Email.WaitForElement(1000);
             getAttendees.Populate(attendee5);
             Assert.IsTrue(getAttendees.AddUserToList.Displayed);
@@ -384,17 +386,8 @@ namespace ATeam.Tests
             attendee6.SelectedProductId = 1;
             int freePlaces6 = getAttendees.GetFreePlaces();
             getAttendees.Email.WaitForElement(1000);
-            getAttendees.Populate(attendee6);
-            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
-            getAttendees.AddUserToList.Click();
-
-            var attendee7 = new Attendee();
-            attendee7.SelectedProductId = 1;
-            int freePlaces7 = getAttendees.GetFreePlaces();
-            getAttendees.Email.WaitForElement(1000);
             getAttendees.Product[0].Click();
             string text = this.driver.SwitchTo().Alert().Text;
-            Assert.IsTrue(getAttendees.AddUserToList.Displayed);
             getAttendees.AddUserToList.Click();
 
         }

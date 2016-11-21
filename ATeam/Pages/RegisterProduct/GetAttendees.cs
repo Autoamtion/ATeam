@@ -34,10 +34,10 @@ namespace ATeam.Pages.RegisterProduct
         [FindsBy(How = How.Name, Using = "product")]
         public IList<IWebElement> Product { get; set; }
 
-        [FindsBy(How = How.Id, Using = "RegistrationLanguageID7")]
+        [FindsBy(How = How.Id, Using = "RegistrationLanguageID7add")]
         public IWebElement ProductLanguageEnglish { get; set; }
 
-        [FindsBy(How = How.Id, Using = "RegistrationLanguageID8")]
+        [FindsBy(How = How.Id, Using = "RegistrationLanguageID8add")]
         public IWebElement ProductLanguagePolish { get; set; }
 
         [FindsBy(How = How.Id, Using = "ProductFormIdpapierowa")]
@@ -105,6 +105,7 @@ namespace ATeam.Pages.RegisterProduct
         }
         public int GetFreePlaces()
         {
+            WebDriverExtensions.WaitForAjax(driver);
             string value = this.NumberOfFreePlaces.Text;
             string result = Regex.Match(value, @"\d+").ToString();
             return int.Parse(result);
