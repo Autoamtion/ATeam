@@ -88,6 +88,7 @@
     <Compile Include="Pages\Registration\RegistrationList.cs" />
     <Compile Include="Pages\Session\AddSession.cs" />
     <Compile Include="Pages\Session\ClosedRegistrationDateAndPlace.cs" />
+    <Compile Include="Pages\Session\ClosedSessionParticipants.cs" />
     <Compile Include="Pages\Session\Details.cs" />
     <Compile Include="Pages\Session\EditSession.cs" />
     <Compile Include="Pages\Session\Exams.cs" />

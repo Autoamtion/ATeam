@@ -49,5 +49,8 @@ namespace ATeam.Objects
 
         [DefaultValue(0)]
         public int SelectedProductId { get; set; }
+
+        [DefaultValue(0)]
+        public int SelectedLevelId { get; set; }
     }
 }

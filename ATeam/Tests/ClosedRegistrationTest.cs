@@ -22,6 +22,13 @@ namespace ATeam.Tests
             var proposePage = new ClosedRegistrationDateAndPlace(this.driver);
             proposePage.ProposedDate.WaitForElement(500);
             proposePage.Populate(sessionData);
+            proposePage.ForwardButton.Click();
+
+            var attendee = new Attendee();
+            var users = new ClosedSessionParticipants(this.driver);
+            users.Populate(attendee);
+            users.AddParticipant.Click();
+            users.GoToContactData.Click();
         }
     }
 }
