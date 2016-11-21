@@ -157,8 +157,8 @@ namespace ATeam.Tests
             sessionData.IstqbTestManagementEnglish = false;
             session.Populate(sessionData);
             var text = this.driver.VisibleText();
-            Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
-            Assert.IsTrue(text.Contains("REQB Foundation Level / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Foundation Level"));
+            Assert.IsTrue(text.Contains("REQB Foundation Level"));
             session.SaveSession.Click();
             text = this.driver.VisibleText();
             Assert.IsTrue(text.Contains(sessionData.SessionDate.ToString("dd.MM.yyyy")));
@@ -167,7 +167,7 @@ namespace ATeam.Tests
             Assert.IsTrue(text.Contains(sessionData.PostCode));
             Assert.IsTrue(text.Contains(sessionData.Address));
             Assert.IsTrue(text.Contains(sessionData.City));
-            Assert.IsTrue(text.Contains("Ateam1 Test"));
+            Assert.IsTrue(text.Contains("Ateam 1 Test"));
 
             var sessionDetails = new Details(this.driver);
             sessionDetails.ExamsBtn.Click();
@@ -199,7 +199,7 @@ namespace ATeam.Tests
             sessionData.IstqbTestManagementEnglish = false;
             session.Populate(sessionData);
             var text = this.driver.VisibleText();
-            Assert.IsTrue(text.Contains("ISTQB Foundation Level / Angielski, Polski"));
+            Assert.IsTrue(text.Contains("ISTQB Foundation Level"));
             session.SaveSession.Click();
             Thread.Sleep(1500);
             text = this.driver.VisibleText();

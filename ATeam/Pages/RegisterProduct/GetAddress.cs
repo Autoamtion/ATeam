@@ -113,8 +113,9 @@ namespace ATeam.Pages.RegisterProduct
                     this.InvoiceTypesElectronic.Click();
                     this.InvoicePostalCode.Click();
                     this.InvoicePostalCode.Clear();
-                    this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
                     this.InvoicePostalCode.SendKeys(d.InvoicePostalCode);
+                    this.InvoiceCompanyName.SendKeys(d.InvoiceCompanyName);
+                    
                     this.InvoiceCity.Clear();
                     this.InvoiceCity.SendKeys(d.InvoiceCity);
                     this.InvoiceAddress.Clear();

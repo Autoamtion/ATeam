@@ -8,7 +8,9 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace ATeam.Pages.RegisterProduct
 {
+    using System.Diagnostics;
     using System.Text.RegularExpressions;
+    using System.Threading;
 
     using ATeam.Helpers;
     using ATeam.Objects;
@@ -31,13 +33,13 @@ namespace ATeam.Pages.RegisterProduct
         [FindsBy(How = How.Name, Using = "phone")]
         public IWebElement Phone { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "label[for*='ProductPerProductSession']")]
+        [FindsBy(How = How.CssSelector, Using = "label[for*='ProductPerSessionID']")]
         public IList<IWebElement> Product { get; set; }
 
-        [FindsBy(How = How.Id, Using = "RegistrationLanguageID37add")]
+        [FindsBy(How = How.Id, Using = "RegistrationLanguageID38add")]
         public IWebElement ProductLanguageEnglish { get; set; }
 
-        [FindsBy(How = How.Id, Using = "RegistrationLanguageID38add")]
+        [FindsBy(How = How.Id, Using = "RegistrationLanguageID37add")]
         public IWebElement ProductLanguagePolish { get; set; }
 
         [FindsBy(How = How.Id, Using = "ProductFormIdpapierowaadd")]
@@ -72,6 +74,18 @@ namespace ATeam.Pages.RegisterProduct
             if (att.FillPhone)
             {
                 this.Phone.SendKeys(att.PhoneNumber);
+            }
+
+            var sw = new Stopwatch();
+            sw.Start();
+            while (sw.ElapsedMilliseconds < 10000)
+            {
+                if (this.Product.ToList().Count > att.SelectedProductId)
+                {
+                    break;
+                }
+
+                Thread.Sleep(200);
             }
 
             this.Product[att.SelectedProductId].Click();
